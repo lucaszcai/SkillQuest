@@ -9,7 +9,7 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.7),
+      backgroundColor: Colors.grey.withOpacity(0.01),
       body: ListView(
         physics: AlwaysScrollableScrollPhysics(),
         children: <Widget>[
@@ -140,7 +140,7 @@ class _FeedScreenState extends State<FeedScreen> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(width: 20,),
+                                  SizedBox(width: 10,),
                                   Row(
                                     children: <Widget>[
                                       IconButton(
@@ -159,8 +159,22 @@ class _FeedScreenState extends State<FeedScreen> {
                                   ),
                                 ],
                               ),
-                              IconButton(icon: Icon(Icons.bookmark_border), iconSize: 30,
-                                onPressed: () => print('Save Post'),)
+                              GestureDetector(
+                                onTap: () {
+
+                                },
+                                child: Container(
+                                  child: FlatButton.icon(
+                                    color: Colors.blue.withOpacity(0.5),
+                                    icon: Icon(Icons.save_alt),
+                                    label: Text('Learn this!'),
+                                    splashColor: Colors.white,
+                                    onPressed: () {
+
+                                    },
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         )
