@@ -34,6 +34,7 @@ dependencies:
   firebase_storage: ^3.1.5
   image_picker: ^0.6.4
   path: ^1.6.4
+  curved_navigation_bar: ^0.3.2
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,18 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
+
+
+  fonts:
+    - family: Circular
+      fonts:
+        - asset: assets/fonts/CircularStd-Medium.ttf
+        - asset: assets/fonts/CircluarAir-Light.ttf
+          weight: 100
+        - asset: assets/fonts/CircularStd-Bold.ttf
+          weight: 500
 
   # To add assets to your application, add an assets section, like this:
   # assets:

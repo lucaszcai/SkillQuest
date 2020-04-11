@@ -1,7 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:skill_quest/screens/entry_screen.dart';
-import 'package:skill_quest/screens/photo_test.dart';
-import 'package:skill_quest/screens/youtube_test.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -15,10 +15,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Circular',
         primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        //visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CameraTest(),
+      home: EntryScreen(),
     );
   }
 }
