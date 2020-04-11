@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:skill_quest/screens/skill_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class SkillScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _SkillScreenState createState() => _SkillScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SkillScreenState extends State<SkillScreen> {
 
-  List<String> currentSkills = ["Learn Recorder", "Learn Crochet", "Music Composition",];
-  List<String> newSkills = ["Learn Recorder", "Learn Crochet", "Music Composition", "Ride a bike", "Solve a Rubik's Cube"];
-
+  List<String> videos = ['How to play the recorder', 'recorder 101', 'recorder pro', 'recorder legend'];
   int _index = 0;
-  //List<String> locationsImgs = ["assets/images/1.jpg", "assets/images/2.jpg", "assets/images/3.jpg", "assets/images/1.jpg"];
 
-  Widget _buildSkill(String skill) {
+  Widget _buildResource(String name) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
@@ -26,20 +22,13 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    skill,
+                    name,
                     style: TextStyle(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.w600
-                    ),
-                  ),
-                  Text(
-                    "3 days",
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.w400,
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.w600
                     ),
                   ),
                 ],
@@ -55,48 +44,72 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+      body: SingleChildScrollView(
+        child: Container(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              //text at the very top
-              Text(
-                'Hello, Lucas',
-                style: TextStyle(
-                  fontSize: 40.0,
-                  fontWeight: FontWeight.bold
-                ),
+              Stack(
+                children: <Widget>[
+                  Container(
+                    height: 250.0,
+                    color: Colors.red,
+                  ),
+                  Positioned(
+                    top: 15.0,
+                    left: 10.0,
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios, size: 30.0, color: Colors.white,),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                  Positioned(
+                    top: 15.0,
+                    right: 10.0,
+                    child: IconButton(
+                      icon: Icon(Icons.add, size: 30.0, color: Colors.white,),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 10.0,),
-              Text(
-                  'Let\'s learn a new skill',
-                  style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-
-              SizedBox(height: 45.0,),
-
-              //skills currently being learned
-              Text(
-                'Skills you\'re learning',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-
               SizedBox(height: 20.0,),
+              //title
+              Text(
+                  'Recorder Playing',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold
+                  ),
+              ),
+              //description
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                child: Text(
+                  'Learn how to actually play the instrument you got in second grade. The recorder has a surprisingly rich history!',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
 
 
-              //carousel that changes size and stuff
+
+              Text(
+                  'Videos',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+              ),
+
+              SizedBox(height: 10.0,),
+
+
+              //video carousel
               SizedBox(
-                height: 200, // card height
+                height: 150, // card height
                 child: PageView.builder(
-                  itemCount: currentSkills.length,
+                  itemCount: videos.length,
                   controller: PageController(viewportFraction: 0.7),
                   onPageChanged: (int index) => setState(() => _index = index),
                   physics: BouncingScrollPhysics(),
@@ -112,12 +125,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: <Widget>[
                               Container(
                                   height: 200,
-                                  width: 300,
+                                  width: 150,
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20.0),
                                     //child: Image(image: Image.network(imageUrls[i]).image,
-                                      //fit: BoxFit.cover,),
+                                    //fit: BoxFit.cover,),
                                   )
                               ),
                               Positioned(
@@ -126,15 +139,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 20.0),
                                     child: Text(
-                                      currentSkills[i],
-                                      style: TextStyle(fontSize: 32, color: Colors.white),
+                                      videos[i],
+                                      style: TextStyle(fontSize: 32, color: Colors.black),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
                                 ),
-                              ),
-                              Center(
-                                child: Icon(Icons.play_arrow, size: 100.0, color: Colors.white,),
                               ),
                               Positioned(
                                 bottom: 30,
@@ -155,14 +165,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              SizedBox(height: 40.0,),
+              SizedBox(height: 20.0,),
 
-              Expanded(
-                child: ListView.builder(
-                  itemCount: newSkills.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return _buildSkill(newSkills[index]);
-                  },
+              Text(
+                'Resources',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+              Container(
+                height: videos.length * 105.0,
+                child: Expanded(
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: videos.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return _buildResource(videos[index]);
+                    },
+                  ),
                 ),
               ),
 
