@@ -89,6 +89,7 @@ class _CameraTestState extends State<CameraTest> {
       ),
       body: FlatButton(
         child: Text('Take PICTURE'),
+        onPressed: getImage,
       ),
     );
   }
