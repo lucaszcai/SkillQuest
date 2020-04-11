@@ -180,15 +180,22 @@ class _SkillScreenState extends State<SkillScreen> {
                 ),
               ),
 
-              Container(
-                height: videos.length * 105.0,
-                child: Expanded(
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: videos.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return _buildResource(videos[index]);
-                    },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Container(
+                  height: videos.length * 105.0,
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: videos.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return _buildResource(videos[index]);
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
