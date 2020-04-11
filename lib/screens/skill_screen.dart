@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skill_quest/models/skill_result.dart';
+import 'package:skill_quest/screens/api_client.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class SkillScreen extends StatefulWidget {
@@ -11,7 +13,15 @@ class _SkillScreenState extends State<SkillScreen> {
   List<String> videos = ['How to play the recorder', 'recorder 101', 'recorder pro', 'recorder legend'];
   int _index = 0;
 
-  Widget _buildResource(String name) {
+  //TODO set up so that it takes you to the url on tap
+  Widget _buildResource(int index) {
+    if(index>10){
+      return new SizedBox(
+        height: 0,
+        width: 0,
+      );
+    }
+    String url = skillResources[index].url;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
@@ -26,7 +36,7 @@ class _SkillScreenState extends State<SkillScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    name,
+                    skillResources[index].title,
                     style: TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.w600
@@ -134,13 +144,13 @@ class _SkillScreenState extends State<SkillScreen> {
               ),
 
               Container(
-                height: videos.length * 105.0,
+                height: skillResources.length * 75.0,
                 child: Expanded(
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: videos.length,
+                    itemCount: skillResources.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return _buildResource(videos[index]);
+                      return _buildResource(index);
                     },
                   ),
                 ),
@@ -153,10 +163,16 @@ class _SkillScreenState extends State<SkillScreen> {
     );
   }
 
+  List<SkillResult> skillResources = [];
   @override
   void initState() {
     super.initState();
     callAPI("How to play recorder");
+    fetchSkillResult("play recorder").then((resources){
+      setState(() {
+        skillResources=resources;
+      });
+    });
     print('hello');
   }
 
@@ -173,6 +189,60 @@ class _SkillScreenState extends State<SkillScreen> {
   }
 
   Widget listItem(index){
+    if(index>10){
+      return new SizedBox(
+        height: 0,
+        width: 0,
+      );
+    }
+    return Transform.scale(
+      scale: index == _index ? 1 : 0.9,
+      child: GestureDetector(
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen())),
+        child: Card(
+          elevation: 6,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                  height: 200,
+                  //width: 150,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    //child: Image(image: Image.network(imageUrls[i]).image,
+                    //fit: BoxFit.cover,),
+                    child: Image.network(ytResult[index].thumbnail['default']['url'],fit: BoxFit.cover,),
+                  )
+              ),
+              Center(
+
+                child: Text(
+                  ytResult[index].title,
+                  style: TextStyle(fontSize: 32, color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+
+              ),
+              Positioned(
+                bottom: 30,
+                left: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+
+  }
+
+  Widget resourceListItem(index){
     if(index>10){
       return new SizedBox(
         height: 0,

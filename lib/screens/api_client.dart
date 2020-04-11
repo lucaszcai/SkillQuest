@@ -7,17 +7,20 @@ import 'package:skill_quest/models/skill_result.dart';
 
 
 
-Future<SkillResult> fetchSkillResult(String text) async {
+Future<List<SkillResult>> fetchSkillResult(String text) async {
 
-  String url = 'http://192.168.0.120:8080/skill/?skill='+text;
+  String url = 'http://192.168.0.200:8080/skill/?skill='+text;
   print(url);
   Response response = await get(url);
   // sample info available in response
   //int statusCode = response.statusCode;
   print(response.body);
-  SkillResult footprintResult = SkillResult.fromJson(json.decode(response.body));
+  var j = json.decode(response.body);
+  List<SkillResult> songs = [];
+  for(Map<String, dynamic> m in j['body']){
+    songs.add(SkillResult.fromJson(m));
+  }
 
-  print(footprintResult);
-  return footprintResult;
-
+  print(songs);
+  return songs;
 }
