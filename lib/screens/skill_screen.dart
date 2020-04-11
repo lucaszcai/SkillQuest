@@ -242,57 +242,5 @@ class _SkillScreenState extends State<SkillScreen> {
 
   }
 
-  Widget resourceListItem(index){
-    if(index>10){
-      return new SizedBox(
-        height: 0,
-        width: 0,
-      );
-    }
-    return Transform.scale(
-      scale: index == _index ? 1 : 0.9,
-      child: GestureDetector(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen())),
-        child: Card(
-          elevation: 6,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                  height: 200,
-                  //width: 150,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    //child: Image(image: Image.network(imageUrls[i]).image,
-                    //fit: BoxFit.cover,),
-                    child: Image.network(ytResult[index].thumbnail['default']['url'],fit: BoxFit.cover,),
-                  )
-              ),
-              Center(
 
-                child: Text(
-                  ytResult[index].title,
-                  style: TextStyle(fontSize: 32, color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-
-              ),
-              Positioned(
-                bottom: 30,
-                left: 10,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-
-  }
 }

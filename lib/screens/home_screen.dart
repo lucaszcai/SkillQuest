@@ -69,16 +69,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontWeight: FontWeight.bold
                 ),
               ),
-              SizedBox(height: 10.0,),
+              SizedBox(height: 5.0,),
               Text(
                   'Let\'s learn a new skill',
                   style: TextStyle(
-                  fontSize: 30.0,
+                  fontSize: 25.0,
                   fontWeight: FontWeight.w400,
                 ),
               ),
 
-              SizedBox(height: 45.0,),
+              SizedBox(height: 30.0,),
 
               //skills currently being learned
               Text(
