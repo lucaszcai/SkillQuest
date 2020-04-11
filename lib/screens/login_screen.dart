@@ -54,10 +54,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontSize: 80.0, fontWeight: FontWeight.w300)),
                     ),
                     SizedBox(
-                      height: 10.0,
+                      height: 20.0,
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(16.0, 165.0, 0.0, 0.0),
+                      padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
                       child: Text('Quest',
                           style: TextStyle(
                               fontSize: 80.0, fontWeight: FontWeight.bold)),
