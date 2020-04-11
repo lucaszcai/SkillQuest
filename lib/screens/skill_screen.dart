@@ -51,8 +51,13 @@ class _SkillScreenState extends State<SkillScreen> {
               Stack(
                 children: <Widget>[
                   Container(
-                    height: 250.0,
+                    height: 200.0,
+                    width: double.infinity,
                     color: Colors.red,
+                    child: Image.asset(
+                      'assets/images/recorderplayer.jpg',
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Positioned(
                     top: 15.0,
@@ -107,7 +112,7 @@ class _SkillScreenState extends State<SkillScreen> {
 
               //video carousel
               SizedBox(
-                height: 150, // card height
+                height: 200, // card height
                 child: PageView.builder(
                   itemCount: videos.length,
                   controller: PageController(viewportFraction: 0.7),
@@ -125,26 +130,26 @@ class _SkillScreenState extends State<SkillScreen> {
                             children: <Widget>[
                               Container(
                                   height: 200,
-                                  width: 150,
+                                  //width: 150,
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20.0),
                                     //child: Image(image: Image.network(imageUrls[i]).image,
                                     //fit: BoxFit.cover,),
+                                    child: Image.asset(
+                                      'assets/images/recorderplayer.jpg',
+                                      fit: BoxFit.cover,
+                                    ),
                                   )
                               ),
-                              Positioned(
-                                child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 20.0),
+                              Center(
+
                                     child: Text(
                                       videos[i],
-                                      style: TextStyle(fontSize: 32, color: Colors.black),
+                                      style: TextStyle(fontSize: 32, color: Colors.white),
                                       textAlign: TextAlign.center,
                                     ),
-                                  ),
-                                ),
+
                               ),
                               Positioned(
                                 bottom: 30,

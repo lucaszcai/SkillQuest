@@ -118,34 +118,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(20.0),
                                     //child: Image(image: Image.network(imageUrls[i]).image,
                                       //fit: BoxFit.cover,),
-                                  )
+                                    child: Image.asset('assets/images/recorderplayer.jpg',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                               ),
-                              Positioned(
-                                child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 20.0),
+                              Center(
                                     child: Text(
                                       currentSkills[i],
                                       style: TextStyle(fontSize: 32, color: Colors.white),
                                       textAlign: TextAlign.center,
                                     ),
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Icon(Icons.play_arrow, size: 100.0, color: Colors.white,),
-                              ),
-                              Positioned(
-                                bottom: 30,
-                                left: 10,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
 
-                                  ],
-                                ),
-                              )
+                              ),
+
                             ],
                           ),
                         ),
@@ -155,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              SizedBox(height: 40.0,),
+              SizedBox(height: 20.0,),
 
               Expanded(
                 child: ListView.builder(
