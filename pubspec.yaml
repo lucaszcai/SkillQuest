@@ -52,13 +52,14 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/recorderplayer.jpg
 
 
   fonts:
     - family: Circular
       fonts:
         - asset: assets/fonts/CircularStd-Medium.ttf
-        - asset: assets/fonts/CircluarAir-Light.ttf
+        - asset: assets/fonts/CircularAir-Light.ttf
           weight: 100
         - asset: assets/fonts/CircularStd-Bold.ttf
           weight: 500

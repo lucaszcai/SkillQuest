@@ -9,7 +9,7 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white.withOpacity(0.7),
       body: ListView(
         physics: AlwaysScrollableScrollPhysics(),
         children: <Widget>[
@@ -32,7 +32,9 @@ class _FeedScreenState extends State<FeedScreen> {
                       iconSize: 25,
                       onPressed: () => print('Shuffle Feed'),
                     ),
-                    SizedBox(width: 8,),
+                    SizedBox(
+                      width: 8,
+                    ),
                     Container(
                       width: 35,
                       child: IconButton(
@@ -46,25 +48,27 @@ class _FeedScreenState extends State<FeedScreen> {
               ],
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Container(
               width: double.infinity,
-              height: 400,
+              height: 460,
               decoration: BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.circular(25.0)
-              ),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25.0)),
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10,),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10,
+                    ),
                     child: Column(
                       children: <Widget>[
                         ListTile(
                           leading: Container(
-                            margin: EdgeInsets.all(10),
                             width: 50,
                             height: 50,
                             decoration: BoxDecoration(
@@ -72,19 +76,92 @@ class _FeedScreenState extends State<FeedScreen> {
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black45,
-                                  offset: Offset(0,2),
+                                  offset: Offset(0, 2),
                                   blurRadius: 6,
                                 )
                               ],
                             ),
-                            //child: CircleAvatar(
-                             // child: ClipOval(
-                             //   child: Image(
-                              //    height: 60,
-                              //    width: 60,
-                              //  ),
-                            //  ),
-                          //  ),
+                            child: CircleAvatar(
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'assets/images/profile.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                          title: Text(
+                            'Vincent Do',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text('3 min ago'),
+                          trailing: IconButton(
+                            icon: Icon(Icons.more_horiz),
+                            color: Colors.black45,
+                            onPressed: () => print('More'),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          width: double.infinity,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black45,
+                                offset: Offset(0, 5),
+                                blurRadius: 8.0,
+                              ),
+                            ],
+                            // IMAGE GOES HERE
+                          ),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      IconButton(
+                                        icon: Icon(Icons.favorite_border),
+                                        iconSize: 30,
+                                        onPressed: () => print('Like Post'),
+                                      ),
+                                      Text(
+                                        '4202',
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(width: 20,),
+                                  Row(
+                                    children: <Widget>[
+                                      IconButton(
+                                        icon: Icon(Icons.chat),
+                                        iconSize: 30,
+                                        onPressed: () => print('Comment'),
+                                      ),
+                                      Text(
+                                        '62',
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              IconButton(icon: Icon(Icons.bookmark_border), iconSize: 30,
+                                onPressed: () => print('Save Post'),)
+                            ],
                           ),
                         )
                       ],

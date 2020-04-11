@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_api/youtube_api.dart';
 
 class SkillScreen extends StatefulWidget {
   @override
@@ -51,8 +52,13 @@ class _SkillScreenState extends State<SkillScreen> {
               Stack(
                 children: <Widget>[
                   Container(
-                    height: 250.0,
+                    height: 200.0,
+                    width: double.infinity,
                     color: Colors.red,
+                    child: Image.asset(
+                      'assets/images/recorderplayer.jpg',
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Positioned(
                     top: 15.0,
@@ -107,61 +113,13 @@ class _SkillScreenState extends State<SkillScreen> {
 
               //video carousel
               SizedBox(
-                height: 150, // card height
+                height: 200, // card height
                 child: PageView.builder(
-                  itemCount: videos.length,
                   controller: PageController(viewportFraction: 0.7),
                   onPageChanged: (int index) => setState(() => _index = index),
                   physics: BouncingScrollPhysics(),
-                  itemBuilder: (_, i) {
-                    return Transform.scale(
-                      scale: i == _index ? 1 : 0.9,
-                      child: GestureDetector(
-                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen())),
-                        child: Card(
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                          child: Stack(
-                            children: <Widget>[
-                              Container(
-                                  height: 200,
-                                  width: 150,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    //child: Image(image: Image.network(imageUrls[i]).image,
-                                    //fit: BoxFit.cover,),
-                                  )
-                              ),
-                              Positioned(
-                                child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 20.0),
-                                    child: Text(
-                                      videos[i],
-                                      style: TextStyle(fontSize: 32, color: Colors.black),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 30,
-                                left: 10,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                  itemCount: ytResult.length,
+                  itemBuilder: (_, int index) => listItem(index)
                 ),
               ),
 
@@ -193,5 +151,78 @@ class _SkillScreenState extends State<SkillScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    callAPI("How to play recorder");
+    print('hello');
+  }
+
+  static String key = "AIzaSyAnWtZXDJ5w6akYcm97oBhCK9JC4Lq9abY";
+  YoutubeAPI ytApi = new YoutubeAPI(key);
+  List<YT_API> ytResult = [];
+
+  callAPI(String query) async {
+    print('UI callled');
+    ytResult = await ytApi.search(query);
+    setState(() {
+      print('UI Updated');
+    });
+  }
+
+  Widget listItem(index){
+    if(index>10){
+      return new SizedBox(
+        height: 0,
+        width: 0,
+      );
+    }
+    return Transform.scale(
+      scale: index == _index ? 1 : 0.9,
+      child: GestureDetector(
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen())),
+        child: Card(
+          elevation: 6,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                  height: 200,
+                  //width: 150,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    //child: Image(image: Image.network(imageUrls[i]).image,
+                    //fit: BoxFit.cover,),
+                    child: Image.network(ytResult[index].thumbnail['default']['url'],fit: BoxFit.cover,),
+                  )
+              ),
+              Center(
+
+                child: Text(
+                  ytResult[index].title,
+                  style: TextStyle(fontSize: 32, color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+
+              ),
+              Positioned(
+                bottom: 30,
+                left: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+
   }
 }
