@@ -46,6 +46,18 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
+
+
+  fonts:
+    - family: Circular
+      fonts:
+        - asset: assets/fonts/CircularStd-Medium.ttf
+        - asset: assets/fonts/CircluarAir-Light.ttf
+          weight: 100
+        - asset: assets/fonts/CircularStd-Bold.ttf
+          weight: 500
 
   # To add assets to your application, add an assets section, like this:
   # assets:
