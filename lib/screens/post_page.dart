@@ -98,7 +98,7 @@ class _PostPageState extends State<PostPage> {
         });
       }
     });
-    
+
 
     Navigator.pop(context);
     /*
