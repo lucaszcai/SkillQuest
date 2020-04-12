@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skill_quest/models/skill_result.dart';
 import 'package:skill_quest/screens/api_client.dart';
 import 'package:skill_quest/screens/post_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class SkillScreen extends StatefulWidget {
@@ -13,6 +14,16 @@ class _SkillScreenState extends State<SkillScreen> {
 
   List<String> videos = ['How to play the recorder', 'recorder 101', 'recorder pro', 'recorder legend'];
   int _index = 0;
+
+  _launchURL(String url) async {
+    //const url = 'https://flutter.dev';
+    url = url.replaceAll(" ", "");
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   //TODO set up so that it takes you to the url on tap
   Widget _buildResource(int index) {
@@ -42,6 +53,7 @@ class _SkillScreenState extends State<SkillScreen> {
                         fontSize: 17.0,
                         fontWeight: FontWeight.w600
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
 
@@ -57,7 +69,7 @@ class _SkillScreenState extends State<SkillScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,),
         backgroundColor: Colors.blue,
         onPressed:(){
           Navigator.push(
@@ -93,7 +105,7 @@ class _SkillScreenState extends State<SkillScreen> {
                     top: 15.0,
                     right: 10.0,
                     child: IconButton(
-                      icon: Icon(Icons.add, size: 30.0, color: Colors.white,),
+                      icon: Icon(Icons.add, size: 35.0, color: Colors.white,),
                     ),
                   ),
                 ],
@@ -210,7 +222,7 @@ class _SkillScreenState extends State<SkillScreen> {
     return Transform.scale(
       scale: index == _index ? 1 : 0.9,
       child: GestureDetector(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen())),
+        onTap: () => _launchURL(ytResult[index].url),
         child: Card(
           elevation: 6,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -218,7 +230,7 @@ class _SkillScreenState extends State<SkillScreen> {
             children: <Widget>[
               Container(
                   height: 200,
-                  //width: 150,
+                  width: double.infinity,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
@@ -227,15 +239,7 @@ class _SkillScreenState extends State<SkillScreen> {
                     child: Image.network(ytResult[index].thumbnail['default']['url'],fit: BoxFit.cover,),
                   )
               ),
-              Center(
 
-                child: Text(
-                  ytResult[index].title,
-                  style: TextStyle(fontSize: 32, color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-
-              ),
               Positioned(
                 bottom: 30,
                 left: 10,
