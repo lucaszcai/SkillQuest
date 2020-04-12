@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skill_quest/screens/skill_screen.dart';
+import 'package:skill_quest/utilities/colors.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 75.0,
         //width: 200.0,
         decoration: new BoxDecoration(
-          color: new Color(0xffEDE9EF),
+          color: primaryColor,
           boxShadow: [
             BoxShadow(
               color: Colors.grey[300],
@@ -47,7 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     skill,
                     style: TextStyle(
                       fontSize: 17.0,
-                      fontWeight: FontWeight.w600
+                      fontWeight: FontWeight.w600,
+                      color: darkPrimaryColor,
                     ),
                   ),
                   Text(
@@ -55,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
+                      color: darkPrimaryColor,
                     ),
                   ),
                 ],
@@ -81,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Hello, Lucas',
                 style: TextStyle(
                   fontSize: 40.0,
+                    color: darkPrimaryColor,
                   fontWeight: FontWeight.bold
                 ),
               ),
@@ -88,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(
                   'Let\'s learn a new skill',
                   style: TextStyle(
+                    color: darkPrimaryColor,
                   fontSize: 25.0,
                   fontWeight: FontWeight.w400,
                 ),
@@ -97,8 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //skills currently being learned
               Text(
-                'Skills you\'re learning',
+                'Skills you\'re learning:',
                 style: TextStyle(
+                  color: darkPrimaryColor,
                   fontSize: 20.0,
                   fontWeight: FontWeight.w400,
                 ),

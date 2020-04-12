@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skill_quest/utilities/colors.dart';
 
 class leaderboard_selector extends StatefulWidget {
   @override
@@ -43,8 +44,8 @@ class _leaderboard_selectorState extends State<leaderboard_selector> {
                           categories[index],
                           style: TextStyle(
                             color: index == selectedIndex
-                                ? Colors.white
-                                : Colors.white60,
+                                ? darkPrimaryColor
+                                : darkPrimaryColor.withOpacity(0.5),
                             fontSize: 24.0,
                             letterSpacing: 1,
                           ),

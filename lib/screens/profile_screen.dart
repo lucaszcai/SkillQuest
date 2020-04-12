@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skill_quest/models/skill.dart';
+import 'package:skill_quest/utilities/colors.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -95,8 +96,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.white,
-                          Colors.white,
+                          primaryColor,
+                          primaryColor,
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -133,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       spreadRadius: 3,
                       blurRadius: 15),
                     ],
-                      color: Color(0xff6f3d2e),
+                      color: darkPrimaryColor.withOpacity(0.5),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(12),
                         bottomLeft: Radius.circular(12),
@@ -189,7 +190,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     width: 85,
                                     height: 110,
                                     decoration: BoxDecoration(
-                                        color: Colors.brown.withOpacity(0.5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.8),
+                                            offset: Offset(5,10),
+                                            spreadRadius: 1,
+                                            blurRadius: 10,
+                                          )
+                                        ],
+                                        color: primaryColor,
                                         borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(12),
                                           bottomRight: Radius.circular(12),
@@ -202,11 +211,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         children: <Widget>[
                                           Text(
                                             skills.length.toString(),
-                                            style: TextStyle(fontSize: 40, color: Colors.black),
+                                            style: TextStyle(fontSize: 40, color: darkPrimaryColor),
                                           ),
                                           Text(
                                             "SKILLS",
-                                            style: TextStyle(fontSize: 14, color: Colors.black),
+                                            style: TextStyle(fontSize: 14, color: darkPrimaryColor),
                                           )
                                         ],
                                       ),
@@ -233,11 +242,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Colors.white,
                               child: Text(
                                 "EDUCATION",
+                                style: TextStyle(
+                                  color: darkPrimaryColor,
+                                ),
                               ),
                             ),
                             Icon(
                               Icons.school,
-                              color: Colors.black,
+                              color: darkPrimaryColor,
                             ),
                             MaterialButton(
                               onPressed: () {},
@@ -245,11 +257,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Colors.white,
                               child: Text(
                                 "MUSIC",
+                                style: TextStyle(
+                                  color: darkPrimaryColor,
+                                ),
                               ),
                             ),
                             Icon(
                               Icons.music_note,
-                              color: Colors.black,
+                              color: darkPrimaryColor,
                             )
                           ],
                         ),
@@ -338,7 +353,7 @@ _seeMorePosts() {
               blurRadius: 10,
           )
         ],
-          color: Colors.brown.withOpacity(0.5),
+          color: primaryColor,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
             bottomLeft: Radius.circular(12),
@@ -349,10 +364,10 @@ _seeMorePosts() {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.arrow_forward_ios, color: Colors.black,),
+            Icon(Icons.arrow_forward_ios, color: darkPrimaryColor),
             Text(
               "Explore More",
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              style: TextStyle(fontSize: 16, color: darkPrimaryColor),
             )
           ],
         ),

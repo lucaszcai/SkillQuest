@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skill_quest/utilities/colors.dart';
 import 'package:skill_quest/widgets/leaderboard_selector.dart';
 
 class LeaderboardScreen extends StatefulWidget {
@@ -55,8 +56,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                       bottomRight: Radius.circular(16.0)),
                   gradient: LinearGradient(
                       colors: [
-                        Color.fromRGBO(20, 11, 106, 0.9),
-                        Color.fromRGBO(20, 11, 106, 0.8)
+                        primaryColor,
+                        primaryColor,
                       ],
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight)),
@@ -69,9 +70,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                       style: TextStyle(
                           fontFamily: 'Montserrat',
                           letterSpacing: 1,
+                          color: darkPrimaryColor,
                           fontSize: 32,
                           //fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          ),
                     ),
                   ),
                   leaderboard_selector(),
@@ -89,11 +91,18 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   itemCount: users.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      leading: Text((index+1).toString()),
+                      leading: Text((index+1).toString(), style: TextStyle(
+                        color: darkPrimaryColor,
+                      ),),
                       title: Text(
                         users[index],
+                        style: TextStyle(
+                          color: darkPrimaryColor,
+                        ),
                       ),
-                      trailing: Text("6969"),
+                      trailing: Text("6969", style: TextStyle(
+                        color: darkPrimaryColor,
+                      ),),
                     );
                   },
                 ),
