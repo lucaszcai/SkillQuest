@@ -57,7 +57,7 @@ class _SkillScreenState extends State<SkillScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,),
         backgroundColor: Colors.blue,
         onPressed:(){
           Navigator.push(
@@ -93,7 +93,7 @@ class _SkillScreenState extends State<SkillScreen> {
                     top: 15.0,
                     right: 10.0,
                     child: IconButton(
-                      icon: Icon(Icons.add, size: 30.0, color: Colors.white,),
+                      icon: Icon(Icons.add, size: 35.0, color: Colors.white,),
                     ),
                   ),
                 ],
