@@ -38,12 +38,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   List<Skill>skills = [];
   List<String>categories = [];
-  String email = "";
-  String name = "";
+  String email = "lucaszcai@gmail.com";
+  String name = "Lucas Cai";
   String picurl = "";
 
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+    getUserSkills();
+    print('hello');
+  }
+
+
+  Future getUserSkills() async{
+    await Firestore.instance.collection('skills').getDocuments().then((snapshot){
+      for (DocumentSnapshot ds in snapshot.documents){
+        if(ds.data['uid']==widget.uid){
+          setState(() {
+            skills.add(Skill.fromMap(ds.data));
+          });
+        }
+      }
+    });
+
+    for(Skill s in skills){
+      if(categories.contains(s.category)==false){
+        print("FOUND CATEGORY");
+        setState(() {
+          categories.add(s.category);
+        });
+      }
+    }
+  }
+
+
   Future getUserInfo() async{
-    Firestore.instance.collection('users').getDocuments().then((snapshot){
+    await Firestore.instance.collection('users').getDocuments().then((snapshot){
       for (DocumentSnapshot ds in snapshot.documents){
         if(ds.data['uid']==widget.uid){
           setState(() {
@@ -63,18 +94,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
       }
 
-    });
-  }
-
-  Future getUserSkills() async{
-    Firestore.instance.collection('skills').getDocuments().then((snapshot){
-      for (DocumentSnapshot ds in snapshot.documents){
-        if(ds.data['uid']==widget.uid){
-          setState(() {
-            skills.add(Skill.fromMap(ds.data));
-          });
-        }
-      }
     });
   }
 
@@ -261,89 +280,91 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  _profilePost(int index) {
+    String profilePostImage = "";
 
-}
+    switch (index) {
+      case 0:
+        profilePostImage =
+        "https://images.unsplash.com/photo-1466584241662-8cb021032c1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80";
+        break;
+      case 1:
+        profilePostImage =
+        "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
+        break;
+      case 2:
+        profilePostImage =
+        "https://images.unsplash.com/photo-1516641463285-bf3f40e65bae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
+        break;
+      case 3:
+        profilePostImage =
+        "https://images.unsplash.com/photo-1418290232843-5d7a0bd93f7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+        break;
+      case 4:
+        profilePostImage =
+        "https://images.unsplash.com/photo-1581598681059-18f5871e1d48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80";
+        break;
+      case 5:
+        profilePostImage =
+        "https://images.unsplash.com/photo-1466584241662-8cb021032c1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80";
+        break;
+      default:
+        profilePostImage =
+        "https://images.unsplash.com/photo-1585521551675-64daba4ba31e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80";
+        break;
+    }
 
-
-_profilePost(int index) {
-  String profilePostImage = "";
-
-  switch (index) {
-    case 0:
-      profilePostImage =
-      "https://images.unsplash.com/photo-1466584241662-8cb021032c1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80";
-      break;
-    case 1:
-      profilePostImage =
-      "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
-      break;
-    case 2:
-      profilePostImage =
-      "https://images.unsplash.com/photo-1516641463285-bf3f40e65bae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80";
-      break;
-    case 3:
-      profilePostImage =
-      "https://images.unsplash.com/photo-1418290232843-5d7a0bd93f7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
-      break;
-    case 4:
-      profilePostImage =
-      "https://images.unsplash.com/photo-1581598681059-18f5871e1d48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80";
-      break;
-    case 5:
-      profilePostImage =
-      "https://images.unsplash.com/photo-1466584241662-8cb021032c1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80";
-      break;
-    default:
-      profilePostImage =
-      "https://images.unsplash.com/photo-1585521551675-64daba4ba31e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80";
-      break;
+    return Padding(
+      padding: EdgeInsets.only(left: 10, right: 10),
+      child: Container(
+        width: 200,
+        height: 110,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(12))),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          child: Image.network(
+            profilePostImage,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
   }
 
-  return Padding(
-    padding: EdgeInsets.only(left: 10, right: 10),
-    child: Container(
-      width: 200,
-      height: 110,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(12))),
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        child: Image.network(
-          profilePostImage,
-          fit: BoxFit.cover,
+  _seeMorePosts() {
+    return Padding(
+      padding: EdgeInsets.only(top: 40, bottom: 40, left: 10),
+      child: Container(
+        width: 100,
+        height: 110,
+        decoration: BoxDecoration(
+            color: Colors.brown.withOpacity(0.5),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(12),
+              bottomLeft: Radius.circular(12),
+            )),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(Icons.arrow_forward_ios, color: Colors.black,),
+              Text(
+                "Explore More",
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              )
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
+
+
+
 }
 
-_seeMorePosts() {
-  return Padding(
-    padding: EdgeInsets.only(top: 40, bottom: 40, left: 10),
-    child: Container(
-      width: 100,
-      height: 110,
-      decoration: BoxDecoration(
-          color: Colors.brown.withOpacity(0.5),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            bottomLeft: Radius.circular(12),
-          )),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(Icons.arrow_forward_ios, color: Colors.black,),
-            Text(
-              "Explore More",
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            )
-          ],
-        ),
-      ),
-    ),
-  );
-}
+
