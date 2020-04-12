@@ -1,6 +1,6 @@
 # skill_quest
 
-Coronavirus quarantine things to do app
+This app was made by Prasann Singhal, Lucas Cai, Vincent Do, and Andrew Mao for the Titanhacks Hackathon 2020.
 
 ## Getting Started
 
