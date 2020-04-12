@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class FeedTile extends StatelessWidget {
+
+  final String img;
+
+  const FeedTile({Key key, this.img}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -8,7 +14,7 @@ class FeedTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Container(
           width: double.infinity,
-          height: 460,
+          height: 500,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(25.0)),
@@ -54,6 +60,7 @@ class FeedTile extends StatelessWidget {
                         onPressed: () => print('More'),
                       ),
                     ),
+                    Text('The description goes here! AYAYA'),
                     Container(
                       margin: EdgeInsets.all(10),
                       width: double.infinity,
@@ -118,10 +125,10 @@ class FeedTile extends StatelessWidget {
                             },
                             child: Container(
                               child: FlatButton.icon(
-                                color: Colors.blue.withOpacity(0.5),
-                                icon: Icon(Icons.save_alt),
+                                color: Colors.orangeAccent.withOpacity(0.4),
+                                icon: Icon(Icons.add_circle),
                                 label: Text('Learn this!'),
-                                splashColor: Colors.white,
+                                splashColor: Colors.orangeAccent,
                                 onPressed: () {
 
                                 },
