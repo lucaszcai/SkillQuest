@@ -6,7 +6,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
-import 'package:skill_quest/models/post.dart';
 
 class PostPage extends StatefulWidget {
   PostPage({Key key, this.skill}) : super(key: key);
