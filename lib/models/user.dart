@@ -3,11 +3,12 @@
 class User {
   int id;
   String uid;
+  String email;
   String name;
   int datetime;
   String picurl;
 
-  User({this.id, this.datetime, this.uid, this.name, this.picurl});
+  User({this.email,this.name,this.uid, });
 
   Map<String, dynamic> toMap() =>{
     "id": id,
@@ -17,12 +18,12 @@ class User {
   };
 
   factory User.fromMap(Map<String, dynamic> json) => new User(
-    id: json["id"],
-    datetime:json["datetime"],
-
+    //id: json["id"],
+    //datetime:json["datetime"],
+    email:json["email"],
     uid:json["uid"],
     name:json["name"],
-    picurl:json["picurl"],
+    //picurl:json["picurl"],
 
   );
 

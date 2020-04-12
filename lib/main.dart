@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:skill_quest/screens/entry_screen.dart';
 import 'package:skill_quest/screens/home_page.dart';
+import 'package:skill_quest/screens/home_screen.dart';
 import 'package:skill_quest/screens/onboarding_screen.dart';
+import 'package:skill_quest/utilities/colors.dart';
 
 void main() {
   runApp(MyApp());
@@ -108,7 +110,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Circular',
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
         //visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),

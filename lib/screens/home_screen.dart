@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:skill_quest/models/skill.dart';
 import 'package:skill_quest/screens/skill_screen.dart';
+import 'package:skill_quest/utilities/colors.dart';
 import 'package:skill_quest/utilities/skill_constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -98,6 +99,21 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.circular(20.0),
             child: Container(
               color: new Color(0xffEDE9EF),
+    decoration: new BoxDecoration(
+    color: primaryColor,
+    boxShadow: [
+    BoxShadow(
+    color: Colors.grey[300],
+    blurRadius: 3.0, // has the effect of softening the shadow
+    spreadRadius: 2.0, // has the effect of extending the shadow
+    offset: Offset(
+    2.0, // horizontal, move right 10
+    3.0, // vertical, move down 10
+    ),
+    )
+    ],
+    borderRadius: BorderRadius.circular(20.0)
+    ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
@@ -142,6 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Hello, Lucas',
                 style: TextStyle(
                   fontSize: 40.0,
+                    color: darkPrimaryColor,
                   fontWeight: FontWeight.bold
                 ),
               ),
@@ -149,6 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(
                   'Let\'s learn a new skill',
                   style: TextStyle(
+                    color: darkPrimaryColor,
                   fontSize: 25.0,
                   fontWeight: FontWeight.w400,
                 ),
@@ -158,8 +176,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //skills currently being learned
               Text(
-                'Skills you\'re learning',
+                'Skills you\'re learning:',
                 style: TextStyle(
+                  color: darkPrimaryColor,
                   fontSize: 20.0,
                   fontWeight: FontWeight.w400,
                 ),

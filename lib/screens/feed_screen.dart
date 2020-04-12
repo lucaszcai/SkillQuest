@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:skill_quest/models/post.dart';
 import 'package:skill_quest/models/user.dart';
+import 'package:skill_quest/utilities/colors.dart';
 import 'package:skill_quest/widgets/feedtile.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -20,7 +21,7 @@ class _FeedScreenState extends State<FeedScreen> {
   void initState() {
     super.initState();
     getAllPosts();
-    print('hello');
+    //print('hello');
   }
 
   Future getAllPosts() async{
@@ -49,6 +50,7 @@ class _FeedScreenState extends State<FeedScreen> {
                 Text(
                   'Your Feed',
                   style: TextStyle(
+                    color: darkPrimaryColor,
                     fontSize: 40,
                     fontWeight: FontWeight.w500,
                   ),
@@ -58,6 +60,7 @@ class _FeedScreenState extends State<FeedScreen> {
                     IconButton(
                       icon: Icon(Icons.shuffle),
                       iconSize: 25,
+                      color: darkPrimaryColor,
                       onPressed: () => print('Shuffle Feed'),
                     ),
                     SizedBox(
@@ -68,6 +71,7 @@ class _FeedScreenState extends State<FeedScreen> {
                       child: IconButton(
                         icon: Icon(Icons.add_box),
                         iconSize: 25,
+                        color: darkPrimaryColor,
                         onPressed: () => print('Add Update'),
                       ),
                     )
@@ -88,11 +92,11 @@ class _FeedScreenState extends State<FeedScreen> {
                   return getFeedTile(index);
                 },
               ),
-
+            ),
+      ],
           ),
-        ],
-      ),
-    );
+
+      );
   }
 
   Future likePost(int timestamp) async{
@@ -156,17 +160,14 @@ class _FeedScreenState extends State<FeedScreen> {
                           ],
                         ),
                         child: CircleAvatar(
-                          child: ClipOval(
-                            child:  Image(image: Image.network(posts[index].image).image,
-                              fit: BoxFit.cover,),
-                          ),
+                            backgroundImage: Image.network(posts[index].image).image,
                         ),
                       ),
                       title: Text(
                         'Vincent Do',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: darkPrimaryColor,),
                       ),
-                      subtitle: Text(timeago.format(DateTime.fromMillisecondsSinceEpoch(posts[index].datetime))),
+                      subtitle: Text(timeago.format(DateTime.fromMillisecondsSinceEpoch(posts[index].datetime)), style: TextStyle(color: darkPrimaryColor,),),
                       trailing: IconButton(
                         icon: Icon(Icons.more_horiz),
                         color: Colors.black45,
@@ -204,7 +205,7 @@ class _FeedScreenState extends State<FeedScreen> {
                               Row(
                                 children: <Widget>[
                                   IconButton(
-                                    icon: Icon(Icons.favorite_border),
+                                    icon: Icon(Icons.favorite_border), color: darkPrimaryColor,
                                     iconSize: 30,
                                     onPressed: () {
                                       print("LIKED!");
@@ -216,6 +217,7 @@ class _FeedScreenState extends State<FeedScreen> {
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w600,
+                                        color: darkPrimaryColor,
                                     ),
                                   )
                                 ],
@@ -224,7 +226,7 @@ class _FeedScreenState extends State<FeedScreen> {
                               Row(
                                 children: <Widget>[
                                   IconButton(
-                                    icon: Icon(Icons.chat),
+                                    icon: Icon(Icons.chat), color: darkPrimaryColor,
                                     iconSize: 30,
                                     onPressed: () => print('Comment'),
                                   ),
@@ -232,6 +234,7 @@ class _FeedScreenState extends State<FeedScreen> {
                                     '62',
                                     style: TextStyle(
                                       fontSize: 14.0,
+                                      color: darkPrimaryColor,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   )
@@ -245,10 +248,12 @@ class _FeedScreenState extends State<FeedScreen> {
                             },
                             child: Container(
                               child: FlatButton.icon(
-                                color: Colors.orangeAccent.withOpacity(0.4),
-                                icon: Icon(Icons.add_circle),
-                                label: Text('Learn this!'),
-                                splashColor: Colors.orangeAccent,
+                                  color: primaryColor,
+                                icon: Icon(Icons.add_circle, color: darkPrimaryColor,),
+                                label: Text('Learn this!', style: TextStyle(
+                                  color: darkPrimaryColor,
+                                ),),
+                                splashColor: darkPrimaryColor,
                                 onPressed: () {
 
                                 },
