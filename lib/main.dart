@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:skill_quest/screens/entry_screen.dart';
 import 'package:skill_quest/screens/home_page.dart';
