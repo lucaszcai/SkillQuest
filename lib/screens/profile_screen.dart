@@ -80,6 +80,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 10,
                   height: 10,
                   decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(color: Colors.white.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 15),
+                    ],
                       color: Color(0xff6f3d2e),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(12),
@@ -214,6 +219,18 @@ _numberOfPosts() {
       height: 110,
       decoration: BoxDecoration(
           color: Colors.brown.withOpacity(0.5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              offset: Offset(5,10),
+              spreadRadius: 1,
+              blurRadius: 10,
+            ),
+            BoxShadow(color: Colors.white,
+                offset: Offset(-3,-4),
+                spreadRadius: -2,
+                blurRadius: 20)
+          ],
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(12),
             bottomRight: Radius.circular(12),
@@ -300,6 +317,14 @@ _seeMorePosts() {
       width: 100,
       height: 110,
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              offset: Offset(-5,10),
+              spreadRadius: 1,
+              blurRadius: 10,
+          )
+        ],
           color: Colors.brown.withOpacity(0.5),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),

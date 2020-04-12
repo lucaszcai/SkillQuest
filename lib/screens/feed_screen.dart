@@ -81,7 +81,7 @@ class _FeedScreenState extends State<FeedScreen> {
           ),
           Container(
             height: posts.length * 510.0,
-            child: Expanded(
+
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: posts.length,
@@ -89,7 +89,7 @@ class _FeedScreenState extends State<FeedScreen> {
                   return getFeedTile(index);
                 },
               ),
-            ),
+
           ),
         ],
       ),
