@@ -92,7 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: GestureDetector(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen(skill:SkillConstants.skillNames[a],))),
+        onTap: () async{
+          await Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen(skill:SkillConstants.skillNames[a],)));
+          setState(() {
+
+          });
+        },
         child:Container(
           height: 75.0,
           child: ClipRRect(

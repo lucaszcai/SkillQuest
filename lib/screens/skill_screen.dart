@@ -82,7 +82,6 @@ class _SkillScreenState extends State<SkillScreen> {
 
     bool pass = true;
 
-
     Firestore.instance.collection('skills').getDocuments().then((snapshot) async {
       print("ACCESSED");
       for (DocumentSnapshot ds in snapshot.documents){
@@ -102,6 +101,8 @@ class _SkillScreenState extends State<SkillScreen> {
         });
       }
     });
+
+    Navigator.pop(context);
   }
 
   @override
@@ -109,7 +110,7 @@ class _SkillScreenState extends State<SkillScreen> {
     int ind = SkillConstants.skillNames.indexOf(widget.skill);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add,),
+        child: Icon(Icons.check,),
         backgroundColor: Colors.blue,
         onPressed:(){
           Navigator.push(
