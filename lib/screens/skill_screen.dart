@@ -37,7 +37,9 @@ class _SkillScreenState extends State<SkillScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: GestureDetector(
-        onTap: _launchURL(url),
+        onTap:(){
+          _launchURL(skillResources[index].url);
+        },
         child: Container(
           height: 75.0,
           child: ClipRRect(
@@ -46,25 +48,21 @@ class _SkillScreenState extends State<SkillScreen> {
               color: new Color(0xffEDE9EF),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      skillResources[index].title,
-                      style: TextStyle(
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.w600
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-
-                ),
+                child:Center(
+                    child: Text(
+                        skillResources[index].title,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.w600
+                        ),
+              ),
+                )
               ),
             ),
           ),
         ),
-      ),
+      )
     );
   }
 
@@ -170,7 +168,7 @@ class _SkillScreenState extends State<SkillScreen> {
               ),
 
               Container(
-                height: skillResources.length * 75.0,
+                height:12 * 95.0,
                 child: Expanded(
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
@@ -209,6 +207,7 @@ class _SkillScreenState extends State<SkillScreen> {
   callAPI(String query) async {
     print('UI callled');
     ytResult = await ytApi.search(query);
+    print("URL"+ytResult[1].url);
     setState(() {
       print('UI Updated');
     });
