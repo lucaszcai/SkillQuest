@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skill_quest/models/skill_result.dart';
 import 'package:skill_quest/screens/api_client.dart';
+import 'package:skill_quest/screens/post_page.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class SkillScreen extends StatefulWidget {
@@ -55,6 +56,16 @@ class _SkillScreenState extends State<SkillScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        onPressed:(){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PostPage()),
+          );
+        },
+      ),
       body: SingleChildScrollView(
         child: Container(
           child: Column(

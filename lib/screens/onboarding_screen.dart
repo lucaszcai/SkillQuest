@@ -174,7 +174,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
 
   Widget skipButton(BuildContext context){
     return FlatButton(
-      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen())),
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => EntryScreen())),
       child: Text(
         'Skip',
         style: TextStyle(
