@@ -82,7 +82,6 @@ class _SkillScreenState extends State<SkillScreen> {
 
     bool pass = true;
 
-
     Firestore.instance.collection('skills').getDocuments().then((snapshot) async {
       print("ACCESSED");
       for (DocumentSnapshot ds in snapshot.documents){
@@ -102,6 +101,8 @@ class _SkillScreenState extends State<SkillScreen> {
         });
       }
     });
+
+    Navigator.pop(context);
   }
 
   @override

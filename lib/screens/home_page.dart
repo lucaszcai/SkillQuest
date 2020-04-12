@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
       body: _pageOptions[_selectedTab],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
+          color: Colors.blue,
           boxShadow: <BoxShadow>[
             BoxShadow(
                 color: Colors.black54,
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                 offset: Offset(0.0, 0.75)
             )
           ],
-          color: Colors.blue,
+
         ),
         child: CurvedNavigationBar(
           height: MediaQuery.of(context).size.height / 14,

@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       }
     });
+
   }
 
   Widget _buildCurSkill(int index) {
@@ -90,7 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(fontSize: 32, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
+
               ),
+
             ],
           ),
         ),
@@ -102,6 +105,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     getUserSkills();
   }
+
+
 
   Widget _buildSkill(String skill) {
     Random num = new Random();
