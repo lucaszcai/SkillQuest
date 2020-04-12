@@ -125,6 +125,8 @@ class _FeedScreenState extends State<FeedScreen> {
     });
   }
 
+  List<String>predefUsers = ['Prasann', 'Prasann','Vincent Do', 'Lucas Cai', 'Prasann','Lucas', 'Lucas','Vincent Do', 'Lucas Cai', 'Prasann'];
+
   Widget getFeedTile (int index){
 
     print(posts[0].image);
@@ -163,8 +165,8 @@ class _FeedScreenState extends State<FeedScreen> {
                             backgroundImage: Image.network(posts[index].image).image,
                         ),
                       ),
-                      title: Text(
-                        'Vincent Do',
+                      title: Text(predefUsers[index]
+                        ,
                         style: TextStyle(fontWeight: FontWeight.bold, color: darkPrimaryColor,),
                       ),
                       subtitle: Text(timeago.format(DateTime.fromMillisecondsSinceEpoch(posts[index].datetime)), style: TextStyle(color: darkPrimaryColor,),),
@@ -174,7 +176,10 @@ class _FeedScreenState extends State<FeedScreen> {
                         onPressed: () => print('More'),
                       ),
                     ),
-                    Text(posts[index].description),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(posts[index].description),
+                    ),
                     Container(
                       margin: EdgeInsets.all(10),
                       width: double.infinity,

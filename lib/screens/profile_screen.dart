@@ -39,8 +39,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   List<Skill>skills = [];
   List<String>categories = [];
-  String email = "lucaszcai@gmail.com";
-  String name = "Lucas Cai";
+  String email = "prasannsinghal.dev@gmail.com";
+  String name = "Prasann Cai";
   String picurl = "";
 
   @override
@@ -184,11 +184,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               Text(
-                                "Lucas Cai",
+                                "Prasann Singhal",
                                 style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                "@lucas_cai_zixiang",
+                                "prasannsinghal.dev",
                                 style: TextStyle(color: Colors.white, fontSize: 20),
                               ),
                             ],
@@ -229,7 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: <Widget>[
                                           Text(
-                                            "6",
+                                            4.toString(),
                                             style: TextStyle(fontSize: 40, color: darkPrimaryColor),
                                           ),
                                           Text(
