@@ -6,7 +6,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
-import 'package:skill_quest/models/post.dart';
 
 class PostPage extends StatefulWidget {
   PostPage({Key key, this.skill}) : super(key: key);
@@ -27,8 +26,6 @@ class _PostPageState extends State<PostPage> {
 
   void initState() {
     super.initState();
-
-
   }
 
 
@@ -72,6 +69,35 @@ class _PostPageState extends State<PostPage> {
       'ratings': 0,
       'datetime': DateTime.now().millisecondsSinceEpoch
     });
+
+
+    String getCategory(String skill){
+      return "general";
+    }
+
+    bool pass = true;
+
+
+    Firestore.instance.collection('skills').getDocuments().then((snapshot) async {
+      print("ACCESSED");
+      for (DocumentSnapshot ds in snapshot.documents){
+        print("INSIDE");
+        if(ds.data['uid'] == user.uid&&ds.data['name']==widget.skill){
+          pass=false;
+        }
+      }
+      if(pass){
+        await Firestore.instance.collection('skills').add({
+          'uid':user.uid,
+          'id':null,
+          'completed': 0,
+          'category':getCategory(widget.skill),
+          'name': widget.skill,
+          'datetime': DateTime.now().millisecondsSinceEpoch
+        });
+      }
+    });
+
 
     Navigator.pop(context);
     /*

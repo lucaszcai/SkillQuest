@@ -12,8 +12,9 @@ class SkillScreen extends StatefulWidget {
 
 class _SkillScreenState extends State<SkillScreen> {
 
-  List<String> videos = ['How to play the recorder', 'recorder 101', 'recorder pro', 'recorder legend'];
   int _index = 0;
+
+  String curSkill = "play recorder";
 
   _launchURL(String url) async {
     //const url = 'https://flutter.dev';
@@ -75,7 +76,7 @@ class _SkillScreenState extends State<SkillScreen> {
         onPressed:(){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PostPage()),
+            MaterialPageRoute(builder: (context) => PostPage(skill: curSkill,)),
           );
         },
       ),
@@ -187,12 +188,17 @@ class _SkillScreenState extends State<SkillScreen> {
     );
   }
 
+  void setSkill(){
+    //TODO Set Curskill to a random skill
+
+  }
+
   List<SkillResult> skillResources = [];
   @override
   void initState() {
     super.initState();
-    callAPI("How to play recorder");
-    fetchSkillResult("play recorder").then((resources){
+    callAPI("How to "+curSkill);
+    fetchSkillResult(curSkill).then((resources){
       setState(() {
         skillResources=resources;
       });

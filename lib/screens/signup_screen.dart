@@ -156,6 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                         Firestore.instance.collection('users').document(currentUser.user.uid).setData({
                                           "name":nameInputController.text,
                                           "email":emailInputController.text,
+                                          "uid":currentUser.user.uid
                                         });
                                       });
                                   Navigator.push(

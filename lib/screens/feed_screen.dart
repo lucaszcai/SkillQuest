@@ -81,7 +81,6 @@ class _FeedScreenState extends State<FeedScreen> {
           ),
           Container(
             height: posts.length * 510.0,
-            child: Expanded(
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: posts.length,
@@ -89,11 +88,27 @@ class _FeedScreenState extends State<FeedScreen> {
                   return getFeedTile(index);
                 },
               ),
-            ),
+
           ),
         ],
       ),
     );
+  }
+
+  Future likePost(int timestamp) async{
+
+    print("TIMESTAMP"+timestamp.toString());
+    Firestore.instance.collection('posts').getDocuments().then((snapshot) async {
+      print("ACCESSED");
+      for (DocumentSnapshot ds in snapshot.documents){
+        print("INSIDE");
+        if(ds.data['datetime'] == timestamp){
+          print("FOUND");
+          int count = ds.data['total']+1;
+          await Firestore.instance.collection('posts').document(ds.documentID).updateData({'total':count});
+        }
+      }
+    });
   }
 
   Future<User> getUserFromUid(String uid) async{
@@ -191,10 +206,13 @@ class _FeedScreenState extends State<FeedScreen> {
                                   IconButton(
                                     icon: Icon(Icons.favorite_border),
                                     iconSize: 30,
-                                    onPressed: () => print('Like Post'),
+                                    onPressed: () {
+                                      print("LIKED!");
+                                      likePost(posts[index].datetime);
+                                    }
                                   ),
                                   Text(
-                                    '4202',
+                                    posts[index].total.toString(),
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w600,
