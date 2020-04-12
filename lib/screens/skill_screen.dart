@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skill_quest/models/skill_result.dart';
 import 'package:skill_quest/screens/api_client.dart';
 import 'package:skill_quest/screens/post_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class SkillScreen extends StatefulWidget {
@@ -13,6 +14,16 @@ class _SkillScreenState extends State<SkillScreen> {
 
   List<String> videos = ['How to play the recorder', 'recorder 101', 'recorder pro', 'recorder legend'];
   int _index = 0;
+
+  _launchURL(String url) async {
+    //const url = 'https://flutter.dev';
+    url = url.replaceAll(" ", "");
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   //TODO set up so that it takes you to the url on tap
   Widget _buildResource(int index) {
@@ -42,6 +53,7 @@ class _SkillScreenState extends State<SkillScreen> {
                         fontSize: 17.0,
                         fontWeight: FontWeight.w600
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
 
@@ -209,7 +221,7 @@ class _SkillScreenState extends State<SkillScreen> {
     return Transform.scale(
       scale: index == _index ? 1 : 0.9,
       child: GestureDetector(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen())),
+        onTap: () => _launchURL(ytResult[index].url),
         child: Card(
           elevation: 6,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
