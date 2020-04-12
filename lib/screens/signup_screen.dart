@@ -94,7 +94,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   children: <Widget>[
                     Spacer(),
                     GestureDetector(
-
+                      onTap: (){
+                        getImage();
+                      },
                       child: CircleAvatar(
                         radius: 50.0,
                         backgroundColor: Colors.grey[400],
@@ -162,8 +164,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           SizedBox(height: 50.0),
                           GestureDetector(
                               onTap: () {
-
                                 if (_signUpFormKey.currentState.validate()) {
+                                  print("HELLO");
                                   FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailInputController.text, password: passwordInputController.text).then(
                                           (currentUser) async {
                                             String pic_url = await FirebaseStorage.instance

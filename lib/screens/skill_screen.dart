@@ -109,7 +109,7 @@ class _SkillScreenState extends State<SkillScreen> {
     int ind = SkillConstants.skillNames.indexOf(widget.skill);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add,),
+        child: Icon(Icons.check,),
         backgroundColor: Colors.blue,
         onPressed:(){
           Navigator.push(
