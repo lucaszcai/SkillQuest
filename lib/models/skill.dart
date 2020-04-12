@@ -3,8 +3,8 @@
 class Skill {
   int id;
   String uid;
-  String completed;
-  String datetime;
+  int completed;
+  int datetime;
   String category;
   String name;
 

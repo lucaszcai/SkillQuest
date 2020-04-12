@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skill_quest/models/skill_result.dart';
 import 'package:skill_quest/screens/api_client.dart';
 import 'package:skill_quest/screens/post_page.dart';
+import 'package:skill_quest/utilities/skill_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_api/youtube_api.dart';
 
@@ -71,6 +72,7 @@ class _SkillScreenState extends State<SkillScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int ind = SkillConstants.skillNames.indexOf(widget.skill);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add,),
@@ -92,10 +94,7 @@ class _SkillScreenState extends State<SkillScreen> {
                     height: 200.0,
                     width: double.infinity,
                     color: Colors.red,
-                    child: Image.asset(
-                      'assets/images/recorderplayer.jpg',
-                      fit: BoxFit.fill,
-                    ),
+                    child: Image.network(SkillConstants.skillUrls[ind],fit: BoxFit.cover,)
                   ),
                   Positioned(
                     top: 15.0,
@@ -117,7 +116,7 @@ class _SkillScreenState extends State<SkillScreen> {
               SizedBox(height: 20.0,),
               //title
               Text(
-                  'Recorder Playing',
+                  widget.skill,
                   style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold
@@ -127,7 +126,7 @@ class _SkillScreenState extends State<SkillScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
                 child: Text(
-                  'Learn how to actually play the instrument you got in second grade. The recorder has a surprisingly rich history!',
+                  SkillConstants.skillDescription[ind],
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.w500,

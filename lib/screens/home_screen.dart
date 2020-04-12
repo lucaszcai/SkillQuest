@@ -23,10 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future getUserSkills() async{
     String user = "";
-    await FirebaseAuth.instance.currentUser().then((value) =>  user = value.uid);
+    await FirebaseAuth.instance.currentUser().then((value) {
+      user = value.uid;
+      print("TASK COMPLETE");
+    });
     await Firestore.instance.collection('skills').getDocuments().then((snapshot){
       for (DocumentSnapshot ds in snapshot.documents){
         if(ds.data['uid']==user){
+          print('HELLO');
           setState(() {
             skills.add(Skill.fromMap(ds.data));
           });
@@ -35,6 +39,51 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
   }
+
+  Widget _buildCurSkill(int index){
+    int ind = SkillConstants.skillNames.indexOf(skills[index].name);
+    return Transform.scale(
+      scale: index == _index ? 1 : 0.9,
+      child: GestureDetector(
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen(skill: SkillConstants.skillNames[ind],))),
+        child: Card(
+          elevation: 6,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: 200,
+                width: 300,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  //child: Image(image: Image.network(imageUrls[i]).image,
+                  //fit: BoxFit.cover,),
+                  child: Image.network(SkillConstants.skillUrls[ind],fit: BoxFit.cover,),
+                  ),
+                ),
+              Center(
+                child: Text(
+                  skills[index].name,
+                  style: TextStyle(fontSize: 32, color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void initState() {
+    super.initState();
+    getUserSkills();
+  }
+
+
 
   Widget _buildSkill(String skill) {
     Random num = new Random();
@@ -74,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-        ),,
+        ),
       )
     );
   }
@@ -123,47 +172,12 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 200, // card height
                 child: PageView.builder(
-                  itemCount: currentSkills.length,
+                  itemCount: skills.length,
                   controller: PageController(viewportFraction: 0.7),
                   onPageChanged: (int index) => setState(() => _index = index),
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (_, i) {
-                    return Transform.scale(
-                      scale: i == _index ? 1 : 0.9,
-                      child: GestureDetector(
-                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen())),
-                        child: Card(
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                          child: Stack(
-                            children: <Widget>[
-                              Container(
-                                  height: 200,
-                                  width: 300,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    //child: Image(image: Image.network(imageUrls[i]).image,
-                                      //fit: BoxFit.cover,),
-                                    child: Image.asset('assets/images/recorderplayer.jpg',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                              ),
-                              Center(
-                                    child: Text(
-                                      currentSkills[i],
-                                      style: TextStyle(fontSize: 32, color: Colors.white),
-                                      textAlign: TextAlign.center,
-                                    ),
-
-                              ),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                    return _buildCurSkill(i);
                   },
                 ),
               ),
