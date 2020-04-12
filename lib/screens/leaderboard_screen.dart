@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skill_quest/models/user.dart';
 import 'package:skill_quest/utilities/colors.dart';
+import 'package:skill_quest/utilities/skill_constants.dart';
 import 'package:skill_quest/widgets/leaderboard_selector.dart';
 
 class LeaderboardScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
       for(DocumentSnapshot ds in snapshot.documents){
         setState(() {
           print(userScores[ds['uid']]);
-          userScores[ds['uid']]+=100;
+          userScores[ds['uid']]+=100*(SkillConstants.skillDuration[SkillConstants.skillNames.indexOf(ds['name'])]);
         });
       }
     });

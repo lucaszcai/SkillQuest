@@ -246,7 +246,7 @@ class _SkillScreenState extends State<SkillScreen> {
     print('hello');
   }
 
-  static String key = "AIzaSyAnWtZXDJ5w6akYcm97oBhCK9JC4Lq9abY";
+  static String key = "AIzaSyDuhrq58n8OWBQGN2AoQBEL-51DCf6pchM";
   YoutubeAPI ytApi = new YoutubeAPI(key);
   List<YT_API> ytResult = [];
 
