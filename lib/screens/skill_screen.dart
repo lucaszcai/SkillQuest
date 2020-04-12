@@ -11,8 +11,12 @@ class SkillScreen extends StatefulWidget {
 }
 
 class _SkillScreenState extends State<SkillScreen> {
-
-  List<String> videos = ['How to play the recorder', 'recorder 101', 'recorder pro', 'recorder legend'];
+  List<String> videos = [
+    'How to play the recorder',
+    'recorder 101',
+    'recorder pro',
+    'recorder legend'
+  ];
   int _index = 0;
 
   _launchURL(String url) async {
@@ -27,7 +31,7 @@ class _SkillScreenState extends State<SkillScreen> {
 
   //TODO set up so that it takes you to the url on tap
   Widget _buildResource(int index) {
-    if(index>10){
+    if (index > 10) {
       return new SizedBox(
         height: 0,
         width: 0,
@@ -35,44 +39,42 @@ class _SkillScreenState extends State<SkillScreen> {
     }
     String url = skillResources[index].url;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: GestureDetector(
-        onTap:(){
-          _launchURL(skillResources[index].url);
-        },
-        child: Container(
-          height: 75.0,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Container(
-              color: new Color(0xffEDE9EF),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child:Center(
-                    child: Text(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: GestureDetector(
+          onTap: () {
+            _launchURL(skillResources[index].url);
+          },
+          child: Container(
+            height: 75.0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Container(
+                color: new Color(0xffEDE9EF),
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Center(
+                      child: Text(
                         skillResources[index].title,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.w600
-                        ),
-              ),
-                )
+                            fontSize: 17.0, fontWeight: FontWeight.w600),
+                      ),
+                    )),
               ),
             ),
           ),
-        ),
-      )
-    );
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add,),
+        child: Icon(
+          Icons.add,
+        ),
         backgroundColor: Colors.blue,
-        onPressed:(){
+        onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => PostPage()),
@@ -98,7 +100,11 @@ class _SkillScreenState extends State<SkillScreen> {
                     top: 15.0,
                     left: 10.0,
                     child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios, size: 30.0, color: Colors.white,),
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        size: 30.0,
+                        color: Colors.white,
+                      ),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ),
@@ -106,23 +112,28 @@ class _SkillScreenState extends State<SkillScreen> {
                     top: 15.0,
                     right: 10.0,
                     child: IconButton(
-                      icon: Icon(Icons.add, size: 35.0, color: Colors.white,),
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.add,
+                        size: 35.0,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20.0,),
+              SizedBox(
+                height: 20.0,
+              ),
               //title
               Text(
-                  'Recorder Playing',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold
-                  ),
+                'Recorder Playing',
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
               ),
               //description
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 15.0),
                 child: Text(
                   'Learn how to actually play the instrument you got in second grade. The recorder has a surprisingly rich history!',
                   style: TextStyle(
@@ -132,32 +143,33 @@ class _SkillScreenState extends State<SkillScreen> {
                 ),
               ),
 
-
-
               Text(
-                  'Videos',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w600,
-                  ),
+                'Videos',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
 
-              SizedBox(height: 10.0,),
-
+              SizedBox(
+                height: 10.0,
+              ),
 
               //video carousel
               SizedBox(
                 height: 200, // card height
                 child: PageView.builder(
-                  controller: PageController(viewportFraction: 0.7),
-                  onPageChanged: (int index) => setState(() => _index = index),
-                  physics: BouncingScrollPhysics(),
-                  itemCount: ytResult.length,
-                  itemBuilder: (_, int index) => listItem(index)
-                ),
+                    controller: PageController(viewportFraction: 0.7),
+                    onPageChanged: (int index) =>
+                        setState(() => _index = index),
+                    physics: BouncingScrollPhysics(),
+                    itemCount: ytResult.length,
+                    itemBuilder: (_, int index) => listItem(index)),
               ),
 
-              SizedBox(height: 20.0,),
+              SizedBox(
+                height: 20.0,
+              ),
 
               Text(
                 'Resources',
@@ -168,7 +180,7 @@ class _SkillScreenState extends State<SkillScreen> {
               ),
 
               Container(
-                height:12 * 95.0,
+                height: 12 * 95.0,
                 child: Expanded(
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
@@ -179,7 +191,6 @@ class _SkillScreenState extends State<SkillScreen> {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
@@ -192,9 +203,9 @@ class _SkillScreenState extends State<SkillScreen> {
   void initState() {
     super.initState();
     callAPI("How to play recorder");
-    fetchSkillResult("play recorder").then((resources){
+    fetchSkillResult("play recorder").then((resources) {
       setState(() {
-        skillResources=resources;
+        skillResources = resources;
       });
     });
     print('hello');
@@ -207,14 +218,14 @@ class _SkillScreenState extends State<SkillScreen> {
   callAPI(String query) async {
     print('UI callled');
     ytResult = await ytApi.search(query);
-    print("URL"+ytResult[1].url);
+    print("URL" + ytResult[1].url);
     setState(() {
       print('UI Updated');
     });
   }
 
-  Widget listItem(index){
-    if(index>10){
+  Widget listItem(index) {
+    if (index > 10) {
       return new SizedBox(
         height: 0,
         width: 0,
@@ -226,29 +237,30 @@ class _SkillScreenState extends State<SkillScreen> {
         onTap: () => _launchURL(ytResult[index].url),
         child: Card(
           elevation: 6,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Stack(
             children: <Widget>[
               Container(
                   height: 200,
                   width: double.infinity,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     //child: Image(image: Image.network(imageUrls[i]).image,
                     //fit: BoxFit.cover,),
-                    child: Image.network(ytResult[index].thumbnail['default']['url'],fit: BoxFit.cover,),
-                  )
-              ),
-
+                    child: Image.network(
+                      ytResult[index].thumbnail['default']['url'],
+                      fit: BoxFit.cover,
+                    ),
+                  )),
               Positioned(
                 bottom: 30,
                 left: 10,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-
-                  ],
+                  children: <Widget>[],
                 ),
               )
             ],
@@ -256,8 +268,5 @@ class _SkillScreenState extends State<SkillScreen> {
         ),
       ),
     );
-
   }
-
-
 }

@@ -8,6 +8,7 @@ class LeaderboardScreen extends StatefulWidget {
 
 class _LeaderboardScreenState extends State<LeaderboardScreen> {
   int userIndex = 0;
+  int score = 1000;
   final List<String> users = [
     'JAMES',
     'JOHN',
@@ -53,13 +54,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(16.0),
                       bottomRight: Radius.circular(16.0)),
-                  gradient: LinearGradient(
-                      colors: [
-                        Color.fromRGBO(20, 11, 106, 0.9),
-                        Color.fromRGBO(20, 11, 106, 0.8)
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight)),
+                  gradient: LinearGradient(colors: [
+                    Color.fromRGBO(180, 191, 209, 1),
+                    Color.fromRGBO(180, 191, 209, .8)
+                  ], begin: Alignment.centerLeft, end: Alignment.centerRight)),
               child: Column(
                 children: <Widget>[
                   Padding(
@@ -84,19 +82,32 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             left: 0,
             right: 0,
             child: Container(
-                height: ScreenHeight * .67,
-                child: ListView.builder(
-                  itemCount: users.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      leading: Text((index+1).toString()),
-                      title: Text(
-                        users[index],
+              height: ScreenHeight * .68,
+              child: ListView.builder(
+                itemCount: users.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromRGBO(180, 191, 209, 1),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      trailing: Text("6969"),
-                    );
-                  },
-                ),
+                      child: ListTile(
+                        leading: Text((index + 1).toString()),
+                        title: Text(
+                          users[index],
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        trailing: Text((score - index).toString()),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],

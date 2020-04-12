@@ -1,4 +1,4 @@
-class Skill{
+class Skill {
   final String name;
   final String description;
   final String category;
