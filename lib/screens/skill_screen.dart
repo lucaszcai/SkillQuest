@@ -6,6 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class SkillScreen extends StatefulWidget {
+  SkillScreen({Key key, this.skill}) : super(key: key);
+  final String skill;
   @override
   _SkillScreenState createState() => _SkillScreenState();
 }
@@ -197,6 +199,7 @@ class _SkillScreenState extends State<SkillScreen> {
   @override
   void initState() {
     super.initState();
+    curSkill = widget.skill;
     callAPI("How to "+curSkill);
     fetchSkillResult(curSkill).then((resources){
       setState(() {

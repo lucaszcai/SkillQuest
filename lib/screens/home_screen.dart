@@ -1,5 +1,11 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:skill_quest/models/skill.dart';
 import 'package:skill_quest/screens/skill_screen.dart';
+import 'package:skill_quest/utilities/skill_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,42 +19,63 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _index = 0;
   //List<String> locationsImgs = ["assets/images/1.jpg", "assets/images/2.jpg", "assets/images/3.jpg", "assets/images/1.jpg"];
+  List<Skill>skills = [];
+
+  Future getUserSkills() async{
+    String user = "";
+    await FirebaseAuth.instance.currentUser().then((value) =>  user = value.uid);
+    await Firestore.instance.collection('skills').getDocuments().then((snapshot){
+      for (DocumentSnapshot ds in snapshot.documents){
+        if(ds.data['uid']==user){
+          setState(() {
+            skills.add(Skill.fromMap(ds.data));
+          });
+        }
+      }
+    });
+
+  }
 
   Widget _buildSkill(String skill) {
+    Random num = new Random();
+    int a = num.nextInt(27);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Container(
-        height: 75.0,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Container(
-            color: new Color(0xffEDE9EF),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    skill,
-                    style: TextStyle(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.w600
+      child: GestureDetector(
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SkillScreen(skill:SkillConstants.skillNames[a],))),
+        child:Container(
+          height: 75.0,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Container(
+              color: new Color(0xffEDE9EF),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      SkillConstants.skillNames[a],
+                      style: TextStyle(
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.w600
+                      ),
                     ),
-                  ),
-                  Text(
-                    "3 days",
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.w400,
+                    Text(
+                      "${SkillConstants.skillDuration[a]} days",
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
 
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        ),,
+      )
     );
   }
 

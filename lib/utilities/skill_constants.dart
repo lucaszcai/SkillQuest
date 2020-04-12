@@ -5,6 +5,67 @@ import 'package:flutter/material.dart';
 
 class SkillConstants{
 
+  static List<int> skillDuration = [
+    2,
+    4,
+    2,
+    5,
+    3,
+    1,
+    1,
+    2,
+    5,
+    2,
+    4,
+    3,
+    7,
+    1,
+    1,
+    1,
+    7,
+    5,
+    1,
+    1,
+    6,
+    1,
+    1,
+    5,
+    4,
+    7,
+    7,
+    2,];
+
+  static List<String> skillUrls = [
+    'https://ak7.picdn.net/shutterstock/videos/22582597/thumb/1.jpg',
+    'https://www.thesprucecrafts.com/thmb/53Tl2PDkMdnR1z5jx9VkuIZ9Zd8=/2800x1867/filters:fill(auto,1)/CrochetHeart5-5baeeaeac9e77c00264228b3.jpg',
+    'https://www.sessions.edu/wp-content/uploads/Bob-Ross-3.jpg',
+    'https://i5.walmartimages.com/asr/6ea495ab-3e06-44ee-884d-aa4a5705ed79_1.e2ad4a6119eaad60049538b09c6c0370.jpeg',
+    'https://cdn.britannica.com/08/166508-050-12D5E894/origami-crane.jpg',
+    'https://4.bp.blogspot.com/-c_NsqZS2GnA/WuDiQGjY-1I/AAAAAAAAAPU/-J0vEydcRQwuc1iv7Q_r58bFyr94qmecACLcBGAs/s1600/Close-up-magic-tricks.jpg',
+    'https://johnnybruscos.com/wp-content/uploads/2014/11/Pizza-Toss-IMG_1748.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/6/6f/ChessSet.jpg',
+    'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gardening-1521662873.jpg',
+    'https://theapachepowwow.net/wp-content/uploads/2017/05/calligraphy-featured.jpg',
+    'https://www.businessmagazinegainesville.com/wp-content/uploads/2018/01/jugglingforbusiness.jpg',
+    'https://www.sciencenews.org/wp-content/uploads/2019/07/071019_MT_poker-ai_feat.jpg',
+    'https://www.musicnotes.com/images2/promos/store/900x520_piano-min.jpg',
+    'https://www.rightthisminute.com/sites/default/files/videos/images/manly-whistle-show.png.converted_1312051944.jpg',
+    'https://miro.medium.com/max/750/0*EGy-KJc-oToieoEz.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/e/ef/Stone_skimming_-Patagonia-9Mar2010.jpg',
+    'burning-glass.com/wp-content/uploads/coding_screen_400x300-e1535048737568.jpg',
+    'https://cdn.mos.cms.futurecdn.net/f1f22fdd6d75dad222ea6dfd52f29ec4-1200-80.jpg',
+    'https://www.yogajournal.com/.image/t_share/MTQ3MTc4MTY5MjM1OTQxMTY3/2yogapedia_274_13_fnl.jpg',
+    'https://d27ucmmhxk51xv.cloudfront.net/media/english/illustration/cartwheel.jpg?version=1.2.1',
+    'https://cdn.careersinmusic.com/wp-content/uploads/2019/11/what-does-a-music-producer-do.jpg',
+    'https://whatscookingamerica.net/wp-content/uploads/2017/07/Chocolate-Cake-Completed-1-opt.jpg',
+    'https://miro.medium.com/max/4000/1*z6Qli8oi_nOPQCyqo3rRVg.png',
+    'https://cdn.doyou.com/articles/the-10-most-important-yoga-poses-for-beginners-25270-bbaRsJ6k.jpg=w768',
+    'adorama.com/alc/wp-content/uploads/2018/07/shutterstock_170815865-1024x563.jpg',
+    'https://cdn.lynda.com/static/landing/images/hero/Digital_Animator_1200x630-1503546170318.jpg',
+    'https://www.wellandgood.com/wp-content/uploads/2019/08/SM_Torso-1.jpeg',
+    'https://www.invaluable.com/blog/wp-content/uploads/2019/03/benefits-of-sketching-hero.jpg',
+  ];
+
   static List<String> categories = [
     'Music','Food','Exercise','Arts & Crafts','Education/Puzzles','Misc'
   ];
