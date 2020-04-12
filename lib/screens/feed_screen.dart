@@ -160,10 +160,7 @@ class _FeedScreenState extends State<FeedScreen> {
                           ],
                         ),
                         child: CircleAvatar(
-                          child: ClipOval(
-                            child:  Image(image: Image.network(posts[index].image).image,
-                              fit: BoxFit.cover,),
-                          ),
+                            backgroundImage: Image.network(posts[index].image).image,
                         ),
                       ),
                       title: Text(
