@@ -7,7 +7,7 @@ class LeaderboardScreen extends StatefulWidget {
 }
 
 class _LeaderboardScreenState extends State<LeaderboardScreen> {
-  int user_index = 0;
+  int userIndex = 0;
   final List<String> users = [
     'JAMES',
     'JOHN',
@@ -18,26 +18,24 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     'RICHARD',
     'CHARLES',
     'JOSEPH',
-    'THOMAS',
-    'CHRISTOPHER',
-    'DANIEL',
-    'PAUL',
-    'MARK',
-    'DONALD',
-    'GEORGE',
-    'KENNETH',
-    'STEVEN',
-    'EDWARD',
-    'BRIAN',
-    'RONALD',
-    'ANTHONY',
-    'KEVIN',
-    'JASON',
-    'MATTHEW',
-    'GARY',
-    'TIMOTHY',
-    'JOSE',
-    'LARRY',
+    'JAMES',
+    'JOHN',
+    'ROBERT',
+    'MICHAEL',
+    'WILLIAM',
+    'DAVID',
+    'RICHARD',
+    'CHARLES',
+    'JOSEPH',
+    'JAMES',
+    'JOHN',
+    'ROBERT',
+    'MICHAEL',
+    'WILLIAM',
+    'DAVID',
+    'RICHARD',
+    'CHARLES',
+    'JOSEPH',
   ];
   @override
   Widget build(BuildContext context) {
@@ -55,10 +53,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(16.0),
                       bottomRight: Radius.circular(16.0)),
-                  gradient: LinearGradient(colors: [
-                    Color.fromRGBO(20, 11, 106, 0.9),
-                    Color.fromRGBO(20, 11, 106, 0.8)
-                  ], begin: Alignment.centerLeft, end: Alignment.centerRight)),
+                  gradient: LinearGradient(
+                      colors: [
+                        Color.fromRGBO(20, 11, 106, 0.9),
+                        Color.fromRGBO(20, 11, 106, 0.8)
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight)),
               child: Column(
                 children: <Widget>[
                   Padding(
@@ -85,13 +86,18 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             child: Container(
                 height: ScreenHeight * .67,
                 child: ListView.builder(
+                  itemCount: users.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      leading: Icon(Icons.account_circle),
-                      title: Text(users[user_index++]),
+                      leading: Text((index+1).toString()),
+                      title: Text(
+                        users[index],
+                      ),
+                      trailing: Text("6969"),
                     );
                   },
-                )),
+                ),
+            ),
           ),
         ],
       ),
