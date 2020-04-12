@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skill_quest/screens/home_page.dart';
+import 'package:path/path.dart' as Path;
 
 
 class SignupScreen extends StatefulWidget {
@@ -35,7 +37,17 @@ class _SignupScreenState extends State<SignupScreen> {
       _image = image;
     });
 
-    //await uploadImage();
+    await uploadImage();
+  }
+
+  Future uploadImage() async {
+    print(Path.basename(_image.path));
+    StorageReference reference = FirebaseStorage.instance
+        .ref()
+        .child("photos/${Path.basename(_image.path)}");
+    StorageUploadTask upload = reference.putFile(_image);
+    await upload.onComplete;
+    print('complete');
   }
 
   String emailValidator(String value) {
@@ -150,13 +162,19 @@ class _SignupScreenState extends State<SignupScreen> {
                           SizedBox(height: 50.0),
                           GestureDetector(
                               onTap: () {
+
                                 if (_signUpFormKey.currentState.validate()) {
                                   FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailInputController.text, password: passwordInputController.text).then(
-                                          (currentUser) {
+                                          (currentUser) async {
+                                            String pic_url = await FirebaseStorage.instance
+                                                .ref()
+                                                .child("photos/${Path.basename(_image.path)}")
+                                                .getDownloadURL();
                                         Firestore.instance.collection('users').document(currentUser.user.uid).setData({
                                           "name":nameInputController.text,
                                           "email":emailInputController.text,
-                                          "uid":currentUser.user.uid
+                                          "uid":currentUser.user.uid,
+                                          "url":pic_url
                                         });
                                       });
                                   Navigator.push(
