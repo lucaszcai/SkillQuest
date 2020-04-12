@@ -7,6 +7,38 @@ class LeaderboardScreen extends StatefulWidget {
 }
 
 class _LeaderboardScreenState extends State<LeaderboardScreen> {
+  int user_index = 0;
+  final List<String> users = [
+    'JAMES',
+    'JOHN',
+    'ROBERT',
+    'MICHAEL',
+    'WILLIAM',
+    'DAVID',
+    'RICHARD',
+    'CHARLES',
+    'JOSEPH',
+    'THOMAS',
+    'CHRISTOPHER',
+    'DANIEL',
+    'PAUL',
+    'MARK',
+    'DONALD',
+    'GEORGE',
+    'KENNETH',
+    'STEVEN',
+    'EDWARD',
+    'BRIAN',
+    'RONALD',
+    'ANTHONY',
+    'KEVIN',
+    'JASON',
+    'MATTHEW',
+    'GARY',
+    'TIMOTHY',
+    'JOSE',
+    'LARRY',
+  ];
   @override
   Widget build(BuildContext context) {
     final double ScreenHeight = MediaQuery.of(context).size.height;
@@ -42,14 +74,24 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                     ),
                   ),
                   leaderboard_selector(),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
                 ],
               ),
             ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+                height: ScreenHeight * .67,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      leading: Icon(Icons.account_circle),
+                      title: Text(users[user_index++]),
+                    );
+                  },
+                )),
           ),
         ],
       ),
