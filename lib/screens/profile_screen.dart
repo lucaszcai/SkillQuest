@@ -1,10 +1,15 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skill_quest/models/skill.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
+
+  ProfileScreen({Key key, this.uid}) : super(key: key);
+  final String uid;
 }
 
 /* _toolBar() {
@@ -30,6 +35,49 @@ class ProfileScreen extends StatefulWidget {
 
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  List<Skill>skills = [];
+  List<String>categories = [];
+  String email = "";
+  String name = "";
+  String picurl = "";
+
+  Future getUserInfo() async{
+    Firestore.instance.collection('users').getDocuments().then((snapshot){
+      for (DocumentSnapshot ds in snapshot.documents){
+        if(ds.data['uid']==widget.uid){
+          setState(() {
+            email = ds.data['email'];
+            name = ds.data['name'];
+            picurl = ds.data['pic'];
+          });
+        }
+      }
+
+      for(Skill s in skills){
+        if(categories.contains(s.category)==false){
+          setState(() {
+            categories.add(s.category);
+          });
+
+        }
+      }
+
+    });
+  }
+
+  Future getUserSkills() async{
+    Firestore.instance.collection('skills').getDocuments().then((snapshot){
+      for (DocumentSnapshot ds in snapshot.documents){
+        if(ds.data['uid']==widget.uid){
+          setState(() {
+            skills.add(Skill.fromMap(ds.data));
+          });
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -105,7 +153,109 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: <Widget>[
                   //_toolBar(),
                   Expanded(
-                  child: _body(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(32.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Text(
+                                "Lucas Cai",
+                                style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "@lucas_cai_zixiang",
+                                style: TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 360,
+                        height: 200,
+                        child: ListView.builder(
+                            itemCount: 8,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              if (index == 0) {
+                                return Padding(
+                                  padding: EdgeInsets.only(top: 45, bottom: 45, right: 10),
+                                  child: Container(
+                                    width: 85,
+                                    height: 110,
+                                    decoration: BoxDecoration(
+                                        color: Colors.brown.withOpacity(0.5),
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(12),
+                                          bottomRight: Radius.circular(12),
+                                        )),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Text(
+                                            skills.length.toString(),
+                                            style: TextStyle(fontSize: 40, color: Colors.black),
+                                          ),
+                                          Text(
+                                            "SKILLS",
+                                            style: TextStyle(fontSize: 14, color: Colors.black),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } else if (index == 7) {
+                                return _seeMorePosts();
+                              } else {
+                                return _profilePost(index);
+                              }
+                            }),
+                      ),
+                      Container(
+                        width: 360,
+                        height: 100,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            MaterialButton(
+                              onPressed: () {},
+                              shape: StadiumBorder(),
+                              color: Colors.white,
+                              child: Text(
+                                "EDUCATION",
+                              ),
+                            ),
+                            Icon(
+                              Icons.school,
+                              color: Colors.black,
+                            ),
+                            MaterialButton(
+                              onPressed: () {},
+                              shape: StadiumBorder(),
+                              color: Colors.white,
+                              child: Text(
+                                "MUSIC",
+                              ),
+                            ),
+                            Icon(
+                              Icons.music_note,
+                              color: Colors.black,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   ),
                 ],
               ),
@@ -117,143 +267,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
 
-}
-
-_body() {
-  return Container(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Align(
-          alignment: Alignment.centerRight,
-          child: _profileInfo(),
-        ),
-        _profilePosts(),
-        _profileActionsAndInfo(),
-      ],
-    ),
-  );
-}
-
-
-_profileInfo() {
-  return Padding(
-    padding: const EdgeInsets.all(32.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        Text(
-          "Lucas Cai",
-          style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
-        ),
-        Text(
-          "@lucas_cai_zixiang",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-      ],
-    ),
-  );
-}
-
-_profilePosts() {
-  return Container(
-    width: 360,
-    height: 200,
-    child: ListView.builder(
-        itemCount: 8,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return _numberOfPosts();
-          } else if (index == 7) {
-            return _seeMorePosts();
-          } else {
-            return _profilePost(index);
-          }
-        }),
-  );
-}
-
-_profileActionsAndInfo() {
-  return Container(
-    width: 360,
-    height: 100,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        MaterialButton(
-          onPressed: () {},
-          shape: StadiumBorder(),
-          color: Colors.white,
-          child: Text(
-            "EDUCATION",
-          ),
-        ),
-        Icon(
-          Icons.school,
-          color: Colors.black,
-        ),
-        MaterialButton(
-          onPressed: () {},
-          shape: StadiumBorder(),
-          color: Colors.white,
-          child: Text(
-            "MUSIC",
-          ),
-        ),
-        Icon(
-          Icons.music_note,
-          color: Colors.black,
-        )
-      ],
-    ),
-  );
-}
-
-_numberOfPosts() {
-  return Padding(
-    padding: EdgeInsets.only(top: 45, bottom: 45, right: 10),
-    child: Container(
-      width: 85,
-      height: 110,
-      decoration: BoxDecoration(
-          color: Colors.brown.withOpacity(0.5),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              offset: Offset(5,10),
-              spreadRadius: 1,
-              blurRadius: 10,
-            ),
-            BoxShadow(color: Colors.white,
-                offset: Offset(-3,-4),
-                spreadRadius: -2,
-                blurRadius: 20)
-          ],
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(12),
-            bottomRight: Radius.circular(12),
-          )),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Text(
-              "6",
-              style: TextStyle(fontSize: 40, color: Colors.black),
-            ),
-            Text(
-              "SKILLS",
-              style: TextStyle(fontSize: 14, color: Colors.black),
-            )
-          ],
-        ),
-      ),
-    ),
-  );
 }
 
 

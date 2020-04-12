@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:skill_quest/screens/home_page.dart';
 
 
@@ -15,12 +18,24 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController emailInputController;
   TextEditingController passwordInputController;
 
+  File _image;
+
   @override
   void initState() {
     super.initState();
     nameInputController = new TextEditingController();
     emailInputController = new TextEditingController();
     passwordInputController = new TextEditingController();
+  }
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+
+    //await uploadImage();
   }
 
   String emailValidator(String value) {
@@ -51,22 +66,35 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                        child: Text(
-                          'Signup',
-                          style: TextStyle(
-                              fontSize: 80.0, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
+                //SizedBox(height: 20.0,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+                  child: Container(
+                    child: Text(
+                      'Signup',
+                      style: TextStyle(
+                          fontSize: 80.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
+
+                Row(
+                  children: <Widget>[
+                    Spacer(),
+                    GestureDetector(
+
+                      child: CircleAvatar(
+                        radius: 50.0,
+                        backgroundColor: Colors.grey[400],
+                        child: Icon(Icons.add_a_photo, size: 40.0, color: Colors.white,),
+                      ),
+                    ),
+                    Spacer()
+                  ],
+                ),
+
                 Container(
-                    padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                    padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
                     child: Form(
                       key: _signUpFormKey,
                       child: Column(
@@ -128,6 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                         Firestore.instance.collection('users').document(currentUser.user.uid).setData({
                                           "name":nameInputController.text,
                                           "email":emailInputController.text,
+                                          "uid":currentUser.user.uid
                                         });
                                       });
                                   Navigator.push(

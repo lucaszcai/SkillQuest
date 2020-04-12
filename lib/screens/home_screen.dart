@@ -16,13 +16,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildSkill(String skill) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
       child: Container(
         height: 75.0,
+        //width: 200.0,
+        decoration: new BoxDecoration(
+          color: new Color(0xffEDE9EF),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[300],
+              blurRadius: 3.0, // has the effect of softening the shadow
+              spreadRadius: 2.0, // has the effect of extending the shadow
+              offset: Offset(
+                2.0, // horizontal, move right 10
+                3.0, // vertical, move down 10
+              ),
+            )
+          ],
+          borderRadius: BorderRadius.circular(20.0)
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: Container(
-            color: new Color(0xffEDE9EF),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
