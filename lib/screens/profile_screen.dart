@@ -229,7 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: <Widget>[
                                           Text(
-                                            skills.length.toString(),
+                                            "6",
                                             style: TextStyle(fontSize: 40, color: darkPrimaryColor),
                                           ),
                                           Text(
