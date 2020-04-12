@@ -4,6 +4,7 @@ import 'package:skill_quest/screens/feed_screen.dart';
 import 'package:skill_quest/screens/home_screen.dart';
 import 'package:skill_quest/screens/leaderboard_screen.dart';
 import 'package:skill_quest/screens/profile_screen.dart';
+import 'package:skill_quest/utilities/colors.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE7EEFB),
+      backgroundColor: primaryColor,
       body: _pageOptions[_selectedTab],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
