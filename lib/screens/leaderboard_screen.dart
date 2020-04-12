@@ -35,7 +35,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
       for(DocumentSnapshot ds in snapshot.documents){
         setState(() {
           print(userScores[ds['uid']]);
-          userScores[ds['uid']]++;
+          userScores[ds['uid']]+=100;
         });
       }
     });

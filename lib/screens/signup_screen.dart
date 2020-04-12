@@ -164,7 +164,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           SizedBox(height: 50.0),
                           GestureDetector(
                               onTap: () {
-                                if (_signUpFormKey.currentState.validate()) {
                                   print("HELLO");
                                   FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailInputController.text, password: passwordInputController.text).then(
                                           (currentUser) async {
@@ -183,7 +182,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                     context,
                                     MaterialPageRoute(builder: (context) => HomePage()),
                                   );
-                                }
                               },
                               child: Container(
                                 height: 50.0,
