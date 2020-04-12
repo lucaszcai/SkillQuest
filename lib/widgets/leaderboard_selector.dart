@@ -46,8 +46,11 @@ class _leaderboard_selectorState extends State<leaderboard_selector> {
                             color: index == selectedIndex
                                 ? darkPrimaryColor
                                 : darkPrimaryColor.withOpacity(0.5),
-                            fontSize: 24.0,
+                            fontWeight: index == selectedIndex
+                                ? FontWeight.bold
+                                : FontWeight.w100,
                             letterSpacing: 1,
+                            fontSize: 24
                           ),
                         ),
                       ],
