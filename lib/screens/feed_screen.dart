@@ -20,7 +20,7 @@ class _FeedScreenState extends State<FeedScreen> {
   void initState() {
     super.initState();
     getAllPosts();
-    print('hello');
+    //print('hello');
   }
 
   Future getAllPosts() async{

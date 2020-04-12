@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:skill_quest/models/user.dart';
 import 'package:skill_quest/widgets/leaderboard_selector.dart';
 
 class LeaderboardScreen extends StatefulWidget {
@@ -8,35 +10,58 @@ class LeaderboardScreen extends StatefulWidget {
 
 class _LeaderboardScreenState extends State<LeaderboardScreen> {
   int userIndex = 0;
-  final List<String> users = [
-    'JAMES',
-    'JOHN',
-    'ROBERT',
-    'MICHAEL',
-    'WILLIAM',
-    'DAVID',
-    'RICHARD',
-    'CHARLES',
-    'JOSEPH',
-    'JAMES',
-    'JOHN',
-    'ROBERT',
-    'MICHAEL',
-    'WILLIAM',
-    'DAVID',
-    'RICHARD',
-    'CHARLES',
-    'JOSEPH',
-    'JAMES',
-    'JOHN',
-    'ROBERT',
-    'MICHAEL',
-    'WILLIAM',
-    'DAVID',
-    'RICHARD',
-    'CHARLES',
-    'JOSEPH',
-  ];
+
+  List<User> users = [];
+  var userScores = {};
+
+  Future getAllUsers() async{
+    await Firestore.instance.collection('users').getDocuments().then((snapshot){
+      for(DocumentSnapshot ds in snapshot.documents){
+        setState(() {
+          users.add(User.fromMap(ds.data));
+          //print(ds.data);
+        });
+      }
+      print(users);
+    });
+  }
+
+  Future getUserScore() async{
+    print("helo");
+    fillScoreMap();
+    await Firestore.instance.collection('skills').getDocuments().then((snapshot){
+      for(DocumentSnapshot ds in snapshot.documents){
+        setState(() {
+          print(userScores[ds['uid']]);
+          userScores[ds['uid']]++;
+        });
+      }
+    });
+  }
+
+  void fillScoreMap(){
+    for(int i = 0; i < users.length; i++){
+      setState(() {
+
+        userScores[users[i].uid] = 0;
+      });
+    }
+    print(users);
+    print(userScores);
+  }
+
+  Future start() async{
+    await getAllUsers();
+    await getUserScore();
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    start();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final double ScreenHeight = MediaQuery.of(context).size.height;
@@ -83,20 +108,25 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
-                height: ScreenHeight * .67,
-                child: ListView.builder(
-                  itemCount: users.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      leading: Text((index+1).toString()),
-                      title: Text(
-                        users[index],
-                      ),
-                      trailing: Text("6969"),
-                    );
-                  },
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                  height: ScreenHeight * .67,
+                  child: ListView.builder(
+                    itemCount: users.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        leading: Text((index+1).toString()),
+                        title: Text(
+                          users[index].name,
+                        ),
+                        trailing: Text(
+                          userScores[users[index].uid].toString()
+                        ),
+                      );
+                    },
+                  ),
+              ),
             ),
           ),
         ],
