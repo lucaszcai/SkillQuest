@@ -36,27 +36,30 @@ class _SkillScreenState extends State<SkillScreen> {
     String url = skillResources[index].url;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Container(
-        height: 75.0,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Container(
-            color: new Color(0xffEDE9EF),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    skillResources[index].title,
-                    style: TextStyle(
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.w600
+      child: GestureDetector(
+        onTap: _launchURL(url),
+        child: Container(
+          height: 75.0,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Container(
+              color: new Color(0xffEDE9EF),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      skillResources[index].title,
+                      style: TextStyle(
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.w600
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+                  ],
 
+                ),
               ),
             ),
           ),
