@@ -27,8 +27,6 @@ class _PostPageState extends State<PostPage> {
 
   void initState() {
     super.initState();
-
-
   }
 
 

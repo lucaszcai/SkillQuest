@@ -96,6 +96,18 @@ class _FeedScreenState extends State<FeedScreen> {
     );
   }
 
+  Future likePost(int timestamp) async{
+    Firestore.instance.collection('posts').getDocuments().then((snapshot){
+      print("ACCESSED");
+      for (DocumentSnapshot ds in snapshot.documents){
+        if(ds.data['timestamp'] == timestamp){
+          int count = 10;
+          Firestore.instance.collection('posts').document(ds.documentID.toString()).updateData({'total':count});
+        }
+      }
+    });
+  }
+
   Future<User> getUserFromUid(String uid) async{
     Firestore.instance.collection('users').getDocuments().then((snapshot){
       for (DocumentSnapshot ds in snapshot.documents){
@@ -191,10 +203,13 @@ class _FeedScreenState extends State<FeedScreen> {
                                   IconButton(
                                     icon: Icon(Icons.favorite_border),
                                     iconSize: 30,
-                                    onPressed: () => print('Like Post'),
+                                    onPressed: () {
+                                      print("LIKED!");
+                                      likePost(posts[index].datetime);
+                                    }
                                   ),
                                   Text(
-                                    '4202',
+                                    posts[index].total.toString(),
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w600,
