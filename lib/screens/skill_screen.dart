@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:skill_quest/models/skill_result.dart';
 import 'package:skill_quest/screens/api_client.dart';
@@ -70,6 +72,38 @@ class _SkillScreenState extends State<SkillScreen> {
     );
   }
 
+  _addSkill(BuildContext context) async{
+
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    String getCategory(String skill){
+      int ind = SkillConstants.skillNames.indexOf(skill);
+      return SkillConstants.skillCategories[ind];
+    }
+
+    bool pass = true;
+
+
+    Firestore.instance.collection('skills').getDocuments().then((snapshot) async {
+      print("ACCESSED");
+      for (DocumentSnapshot ds in snapshot.documents){
+        print("INSIDE");
+        if(ds.data['uid'] == user.uid&&ds.data['name']==widget.skill){
+          pass=false;
+        }
+      }
+      if(pass){
+        await Firestore.instance.collection('skills').add({
+          'uid':user.uid,
+          'id':null,
+          'completed': 0,
+          'category':getCategory(widget.skill),
+          'name': widget.skill,
+          'datetime': DateTime.now().millisecondsSinceEpoch
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     int ind = SkillConstants.skillNames.indexOf(widget.skill);
@@ -109,6 +143,9 @@ class _SkillScreenState extends State<SkillScreen> {
                     right: 10.0,
                     child: IconButton(
                       icon: Icon(Icons.add, size: 35.0, color: Colors.white,),
+                      onPressed:(){
+                        _addSkill(context);
+                      },
                     ),
                   ),
                 ],
