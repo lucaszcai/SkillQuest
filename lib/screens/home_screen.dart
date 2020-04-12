@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Container(
-              color: new Color(0xffEDE9EF),
+              //color: new Color(0xffEDE9EF),
     decoration: new BoxDecoration(
     color: primaryColor,
     boxShadow: [
