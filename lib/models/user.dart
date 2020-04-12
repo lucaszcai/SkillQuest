@@ -7,7 +7,7 @@ class User {
   int datetime;
   String picurl;
 
-  User({this.id, this.datetime, this.uid, this.name, this.datetime, this.picurl});
+  User({this.id, this.datetime, this.uid, this.name, this.picurl});
 
   Map<String, dynamic> toMap() =>{
     "id": id,

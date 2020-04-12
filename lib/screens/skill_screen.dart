@@ -194,6 +194,7 @@ class _SkillScreenState extends State<SkillScreen> {
   callAPI(String query) async {
     print('UI callled');
     ytResult = await ytApi.search(query);
+    print("URL"+ytResult[1].url);
     setState(() {
       print('UI Updated');
     });
