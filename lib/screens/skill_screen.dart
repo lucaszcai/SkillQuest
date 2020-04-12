@@ -206,7 +206,7 @@ class _SkillScreenState extends State<SkillScreen> {
             children: <Widget>[
               Container(
                   height: 200,
-                  //width: 150,
+                  width: double.infinity,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
@@ -215,15 +215,7 @@ class _SkillScreenState extends State<SkillScreen> {
                     child: Image.network(ytResult[index].thumbnail['default']['url'],fit: BoxFit.cover,),
                   )
               ),
-              Center(
 
-                child: Text(
-                  ytResult[index].title,
-                  style: TextStyle(fontSize: 32, color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-
-              ),
               Positioned(
                 bottom: 30,
                 left: 10,
