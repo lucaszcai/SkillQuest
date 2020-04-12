@@ -97,12 +97,16 @@ class _FeedScreenState extends State<FeedScreen> {
   }
 
   Future likePost(int timestamp) async{
-    Firestore.instance.collection('posts').getDocuments().then((snapshot){
+
+    print("TIMESTAMP"+timestamp.toString());
+    Firestore.instance.collection('posts').getDocuments().then((snapshot) async {
       print("ACCESSED");
       for (DocumentSnapshot ds in snapshot.documents){
-        if(ds.data['timestamp'] == timestamp){
-          int count = 10;
-          Firestore.instance.collection('posts').document(ds.documentID.toString()).updateData({'total':count});
+        print("INSIDE");
+        if(ds.data['datetime'] == timestamp){
+          print("FOUND");
+          int count = ds.data['total']+1;
+          await Firestore.instance.collection('posts').document(ds.documentID).updateData({'total':count});
         }
       }
     });
