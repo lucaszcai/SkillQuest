@@ -47,8 +47,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.black,
-                          Colors.black,
+                          Colors.white,
+                          Colors.white,
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -57,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             Positioned(
                 top: 0,
-                bottom: 300,
+                bottom: 310,
                 left: 0,
                 right: 0,
                 child: Padding(
@@ -80,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 10,
                   height: 10,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color(0xff6f3d2e),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(12),
                         bottomLeft: Radius.circular(12),
@@ -139,11 +139,11 @@ _profileInfo() {
       children: <Widget>[
         Text(
           "Lucas Cai",
-          style: TextStyle(color: Colors.black, fontSize: 40, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
         ),
         Text(
-          "Recorder Master",
-          style: TextStyle(color: Colors.black, fontSize: 20),
+          "@lucas_cai_zixiang",
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
       ],
     ),
@@ -187,7 +187,7 @@ _profileActionsAndInfo() {
         ),
         Icon(
           Icons.school,
-          color: Colors.white,
+          color: Colors.black,
         ),
         MaterialButton(
           onPressed: () {},
@@ -199,7 +199,7 @@ _profileActionsAndInfo() {
         ),
         Icon(
           Icons.music_note,
-          color: Colors.white,
+          color: Colors.black,
         )
       ],
     ),
@@ -213,7 +213,7 @@ _numberOfPosts() {
       width: 85,
       height: 110,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.brown.withOpacity(0.5),
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(12),
             bottomRight: Radius.circular(12),
@@ -300,7 +300,7 @@ _seeMorePosts() {
       width: 100,
       height: 110,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.brown.withOpacity(0.5),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
             bottomLeft: Radius.circular(12),
