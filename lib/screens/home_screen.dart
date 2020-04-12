@@ -173,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               //text at the very top
               Text(
-                'Hello, Lucas',
+                'Hello, Prasann',
                 style: TextStyle(
                     fontSize: 40.0,
                     color: darkPrimaryColor,
