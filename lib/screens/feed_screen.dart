@@ -7,6 +7,7 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +53,7 @@ class _FeedScreenState extends State<FeedScreen> {
           SizedBox(
             height: 30,
           ),
+          FeedTile(),
           FeedTile(),
           FeedTile(),
         ],
