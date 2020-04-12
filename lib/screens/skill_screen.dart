@@ -36,32 +36,33 @@ class _SkillScreenState extends State<SkillScreen> {
     String url = skillResources[index].url;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Container(
-        height: 75.0,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Container(
-            color: new Color(0xffEDE9EF),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    skillResources[index].title,
-                    style: TextStyle(
+      child: GestureDetector(
+        onTap:(){
+          _launchURL(skillResources[index].url);
+        },
+        child: Container(
+          height: 75.0,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Container(
+              color: new Color(0xffEDE9EF),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child:Center(
+                    child: Text(
+                        skillResources[index].title,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.w600
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-
+                        ),
+              ),
+                )
               ),
             ),
           ),
         ),
-      ),
+      )
     );
   }
 
@@ -167,7 +168,7 @@ class _SkillScreenState extends State<SkillScreen> {
               ),
 
               Container(
-                height: skillResources.length * 75.0,
+                height:12 * 95.0,
                 child: Expanded(
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
